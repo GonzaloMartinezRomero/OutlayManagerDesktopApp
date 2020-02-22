@@ -114,8 +114,7 @@ namespace OutlayManagerWF
 
             if (!transactionManager.ChangesDetected())
             {
-                Dialog dialog = new Dialog("No changes detected", this);
-                dialog.Show();
+                new DialogManager().ShowDialog(DialogManager.DialogLevel.Information, "No changes detected", null);
             }
             else
             {

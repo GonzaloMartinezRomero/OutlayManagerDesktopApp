@@ -4,6 +4,8 @@ using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Net.Http;
+using System.Net.NetworkInformation;
+using System.Net.Sockets;
 using System.Text;
 
 namespace OutlayManagerWF.WebServices
@@ -12,14 +14,18 @@ namespace OutlayManagerWF.WebServices
     {
         private readonly HttpClient client;
         private readonly string applicationURI;
-        private OutlayDataHelper dataHelper = new OutlayDataHelper();
+        private OutlayDataHelper dataHelper; 
 
         public OutlayAPIManager()
         {
-            applicationURI = ConfigurationManager.AppSettings["applicationURL"] ?? String.Empty;
+            applicationURI = ConfigurationManager.AppSettings["ApplicationURL"] ?? String.Empty;
 
             this.client = new HttpClient();
-        }
+            this.dataHelper = new OutlayDataHelper();
+
+            //Check if the service is online
+            CheckService();
+        }        
 
         public List<TransactionDTO> GetAllTransactions()
         {
@@ -143,6 +149,25 @@ namespace OutlayManagerWF.WebServices
         public void Dispose()
         {
             this.client.Dispose();
+        }
+
+        private void CheckService()
+        {
+            try
+            {
+                //Ping pingSender = new Ping();
+
+                //PingReply reply = pingSender.Send(applicationURI);
+
+                //IPStatus connectionStatus = reply.Status;
+
+                //if (connectionStatus != IPStatus.Success)
+                //    throw new Exception(connectionStatus.ToString());
+
+            }catch(Exception e)
+            {
+                throw new Exception($"Not possible to conect {applicationURI}. Error:{e.Message}",e);
+            }
         }
     }
 }

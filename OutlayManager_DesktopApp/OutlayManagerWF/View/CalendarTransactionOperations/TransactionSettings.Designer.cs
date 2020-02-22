@@ -96,21 +96,21 @@
             this.text_description.Multiline = true;
             this.text_description.Name = "text_description";
             this.text_description.Size = new System.Drawing.Size(155, 72);
-            this.text_description.TabIndex = 5;
+            this.text_description.TabIndex = 4;
             // 
             // text_amount
             // 
             this.text_amount.Location = new System.Drawing.Point(109, 51);
             this.text_amount.Name = "text_amount";
             this.text_amount.Size = new System.Drawing.Size(155, 22);
-            this.text_amount.TabIndex = 7;
+            this.text_amount.TabIndex = 1;
             // 
             // button1
             // 
             this.button1.Location = new System.Drawing.Point(109, 264);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(155, 45);
-            this.button1.TabIndex = 8;
+            this.button1.TabIndex = 5;
             this.button1.Text = "Guardar/Actualizar";
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.Button_ConfirmChanges);
@@ -121,7 +121,7 @@
             this.type_text.Location = new System.Drawing.Point(109, 8);
             this.type_text.Name = "type_text";
             this.type_text.Size = new System.Drawing.Size(155, 24);
-            this.type_text.TabIndex = 9;
+            this.type_text.TabIndex = 0;
             // 
             // dateTimePicker1
             // 
@@ -130,7 +130,7 @@
             this.dateTimePicker1.Location = new System.Drawing.Point(109, 95);
             this.dateTimePicker1.Name = "dateTimePicker1";
             this.dateTimePicker1.Size = new System.Drawing.Size(155, 22);
-            this.dateTimePicker1.TabIndex = 10;
+            this.dateTimePicker1.TabIndex = 2;
             this.dateTimePicker1.Value = new System.DateTime(2019, 11, 1, 18, 10, 24, 0);
             // 
             // text_Codigo
@@ -138,7 +138,7 @@
             this.text_Codigo.Location = new System.Drawing.Point(109, 134);
             this.text_Codigo.Name = "text_Codigo";
             this.text_Codigo.Size = new System.Drawing.Size(155, 22);
-            this.text_Codigo.TabIndex = 12;
+            this.text_Codigo.TabIndex = 3;
             // 
             // maskedTextBox4
             // 

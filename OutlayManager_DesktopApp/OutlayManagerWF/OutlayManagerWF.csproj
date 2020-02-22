@@ -12,6 +12,23 @@
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <TargetFrameworkProfile />
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <PublishUrl>C:\Users\Drebin\Desktop\DeployDesktop\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <AutorunEnabled>true</AutorunEnabled>
+    <ApplicationRevision>2</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <PublishWizardCompleted>true</PublishWizardCompleted>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -33,6 +50,18 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <LangVersion>8.0</LangVersion>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ManifestCertificateThumbprint>FDCDDFC3283FFDCAB22864B5EBBCFA003FDA58E0</ManifestCertificateThumbprint>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ManifestKeyFile>OutlayManagerWF_TemporaryKey.pfx</ManifestKeyFile>
+  </PropertyGroup>
+  <PropertyGroup>
+    <GenerateManifests>true</GenerateManifests>
+  </PropertyGroup>
+  <PropertyGroup>
+    <SignManifests>true</SignManifests>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
@@ -59,6 +88,7 @@
     <Reference Include="WindowsFormsIntegration" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Manager\DialogManager.cs" />
     <Compile Include="Manager\TransactionManager.cs" />
     <Compile Include="Model\Info\ResumeCodeTransaction.cs" />
     <Compile Include="Model\Info\ResumeMonth.cs" />
@@ -68,10 +98,10 @@
     <Compile Include="View\CalendarTransactionOperations\CalendarTransaction.Designer.cs">
       <DependentUpon>CalendarTransaction.cs</DependentUpon>
     </Compile>
-    <Compile Include="Utilities\Dialog.cs">
+    <Compile Include="View\DialogsView\Dialog.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Utilities\Dialog.Designer.cs">
+    <Compile Include="View\DialogsView\Dialog.Designer.cs">
       <DependentUpon>Dialog.cs</DependentUpon>
     </Compile>
     <Compile Include="View\CalendarTransactionOperations\DialogConfirmation.cs">
@@ -117,7 +147,7 @@
     <EmbeddedResource Include="View\CalendarTransactionOperations\CalendarTransaction.resx">
       <DependentUpon>CalendarTransaction.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Utilities\Dialog.resx">
+    <EmbeddedResource Include="View\DialogsView\Dialog.resx">
       <DependentUpon>Dialog.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="View\CalendarTransactionOperations\DialogConfirmation.resx">
@@ -145,6 +175,7 @@
     <EmbeddedResource Include="View\ResumeTransactions\ResumeForm.resx">
       <DependentUpon>ResumeForm.cs</DependentUpon>
     </EmbeddedResource>
+    <None Include="OutlayManagerWF_TemporaryKey.pfx" />
     <None Include="packages.config" />
     <None Include="Properties\DataSources\OutlayManagerWF.Model.DetailTransacionDTO.datasource" />
     <None Include="Properties\DataSources\OutlayManagerWF.Model.TransactionDTO.datasource" />
@@ -161,6 +192,17 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <BootstrapperPackage Include=".NETFramework,Version=v4.8">
+      <Visible>False</Visible>
+      <ProductName>Microsoft .NET Framework 4.8 %28x86 and x64%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

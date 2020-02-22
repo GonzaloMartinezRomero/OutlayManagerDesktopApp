@@ -4,6 +4,7 @@ using OutlayManagerWF.Model.View;
 using OutlayManagerWF.WebServices;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -13,6 +14,8 @@ namespace OutlayManagerWF.Manager
 {
     public class TransactionManager
     {
+        public const string PATH_BACKUP_KEY = "PathBackup";
+
         private readonly List<TransactionDTO> addedTransactions;
         private readonly List<TransactionDTO> modifiedTransactions;
         private readonly List<TransactionDTO> deletedTransactions;
@@ -155,10 +158,11 @@ namespace OutlayManagerWF.Manager
         public List<ResumeCodeTransaction> GetResumeByCode(int year, int month)
         {
             ResumeCodeTransaction resume = new ResumeCodeTransaction();
-            OutlayAPIManager managerAPI = new OutlayAPIManager();
 
             try
             {
+                OutlayAPIManager managerAPI = new OutlayAPIManager();
+
                 List<TransactionDTO> transactions = managerAPI.GetTransaction(year, month);
 
                 List<ResumeCodeTransaction> listResume = transactions.GroupBy(x => x.DetailTransaction.Code)
@@ -179,22 +183,20 @@ namespace OutlayManagerWF.Manager
             {
                 throw new Exception("Error while procesing resume by code", e);
             }
-            finally
-            {
-                managerAPI.Dispose();
-            }
         }
 
-        public ResultInfo SaveAsBackup(string directory)
+        public ResultInfo SaveBackupAsCsv()
         {
             ResultInfo result = new ResultInfo() { IsError = false , Message="Save succesfuly"};
 
+            string directory = ConfigurationManager.AppSettings.Get(PATH_BACKUP_KEY);
+
             if (Directory.Exists(directory))
-            {
-                OutlayAPIManager apiManager = new OutlayAPIManager();
-                
+            {    
                 try
                 {
+                    OutlayAPIManager apiManager = new OutlayAPIManager();
+
                     List<TransactionDTO> allTransactions = apiManager.GetAllTransactions();
 
                     string csvFile = WriteTransactionToCSV(allTransactions);
@@ -210,10 +212,6 @@ namespace OutlayManagerWF.Manager
                     result.IsError = true;
                     result.Message = e.Message;
                 }
-                finally
-                {
-                    apiManager.Dispose();
-                }   
             }
             else
             {

@@ -25,45 +25,61 @@ namespace OutlayManagerWF.View.ResumeTransactions
 
         private void FillComparisionExpenses(int year, int month)
         {
-            List<ResumeMonth> resumeMonthList = new List<ResumeMonth>();
-
-            DateTime dateRequested = new DateTime(year, month, 1);
-
-            TransactionManager trManager = new TransactionManager();
-            resumeMonthList.Add(trManager.GetResume(dateRequested.Year, dateRequested.Month));
-
-            DateTime pastMonth = dateRequested.AddMonths(-1);
-            resumeMonthList.Add(trManager.GetResume(pastMonth.Year, pastMonth.Month));
-
-            DateTime pastYear = dateRequested.AddYears(-1);
-            resumeMonthList.Add(trManager.GetResume(pastYear.Year, pastYear.Month));
-
-            BindingSource bindingSource = new BindingSource
+            try
             {
-                DataSource = resumeMonthList.Select(x=>  
-                {
-                    return new
-                    {
-                        x.Date,
-                        x.Spenses,
-                        x.Incoming
-                    };
-                })
-            };
+                List<ResumeMonth> resumeMonthList = new List<ResumeMonth>();
 
-            this.dataGridComparisionDate.DataSource = bindingSource;
+                DateTime dateRequested = new DateTime(year, month, 1);
+
+                TransactionManager trManager = new TransactionManager();
+                resumeMonthList.Add(trManager.GetResume(dateRequested.Year, dateRequested.Month));
+
+                DateTime pastMonth = dateRequested.AddMonths(-1);
+                resumeMonthList.Add(trManager.GetResume(pastMonth.Year, pastMonth.Month));
+
+                DateTime pastYear = dateRequested.AddYears(-1);
+                resumeMonthList.Add(trManager.GetResume(pastYear.Year, pastYear.Month));
+
+                BindingSource bindingSource = new BindingSource
+                {
+                    DataSource = resumeMonthList.Select(x =>
+                    {
+                        return new
+                        {
+                            x.Date,
+                            x.Spenses,
+                            x.Incoming
+                        };
+                    })
+                };
+
+                this.dataGridComparisionDate.DataSource = bindingSource;
+
+            }catch(Exception e)
+            {
+                new DialogManager().ShowDialog(DialogManager.DialogLevel.Exception, e.Message, this);
+            }
+
         }
 
         private void FillResumeMonthData(int year, int month)
         {
-            List<ResumeCodeTransaction> resumeTransactions = new TransactionManager().GetResumeByCode(year, month)
-                                                                                     .OrderByDescending(x => x.Amount)
-                                                                                     .ToList();
+            try
+            {
+                List<ResumeCodeTransaction> resumeTransactions = new TransactionManager().GetResumeByCode(year, month)
+                                                                                    .OrderByDescending(x => x.Amount)
+                                                                                    .ToList();
 
-            BindingSource bindingSource = new BindingSource();
-            bindingSource.DataSource = resumeTransactions;
+                BindingSource bindingSource = new BindingSource();
+                bindingSource.DataSource = resumeTransactions;
 
-            this.dataGridCodeExpenses.DataSource = bindingSource;
+                this.dataGridCodeExpenses.DataSource = bindingSource;
+            }
+            catch (Exception e)
+            {
+                new DialogManager().ShowDialog(DialogManager.DialogLevel.Exception, e.Message, this);
+            }
+           
         }
     }
 }

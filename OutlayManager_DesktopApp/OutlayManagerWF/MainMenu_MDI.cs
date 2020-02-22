@@ -12,8 +12,7 @@ using System.Windows.Forms;
 namespace OutlayManagerWF
 {
     public partial class MainMenu_MDI : Form
-    {
-        private const string PATH_BACKUP = "D:\\Instalacion_SQLite\\Data\\Backups";
+    {  
         private readonly Dictionary<string, int> monthNumberCorrespondence;
         private readonly HashSet<DateTime> formsLoaded;
 
@@ -83,8 +82,7 @@ namespace OutlayManagerWF
             }
             catch(Exception except)
             {
-                Dialog dialog = new Dialog(except.Message,this);
-                dialog.Show();
+                new DialogManager().ShowDialog(DialogManager.DialogLevel.Exception, except.Message, this);
             }            
         }
 
@@ -126,12 +124,13 @@ namespace OutlayManagerWF
             if (this.autoBackupCheck.Checked)
             {
                 TransactionManager transacionManager = new TransactionManager();
-                ResultInfo resultInfo = transacionManager.SaveAsBackup(PATH_BACKUP);
+                ResultInfo resultInfo = transacionManager.SaveBackupAsCsv();
 
                 if (resultInfo.IsError)
                 {
-                    Dialog d = new Dialog("Backup has not been executed:" + resultInfo.Message);
-                    d.ShowDialog();
+                    new DialogManager().ShowDialog(DialogManager.DialogLevel.Exception,
+                                                   "Backup has not been executed:" + resultInfo.Message,
+                                                   this);
                 }
             }
         }
