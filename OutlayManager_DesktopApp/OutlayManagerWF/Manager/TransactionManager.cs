@@ -113,38 +113,76 @@ namespace OutlayManagerWF.Manager
         }
 
         public List<TransactionDTO> AddedTransactionList => new List<TransactionDTO>(addedTransactions);
+
         public List<TransactionDTO> ModifiedTransactionList => new List<TransactionDTO>(modifiedTransactions);
+
         public List<TransactionDTO> DeletedTransactionList => new List<TransactionDTO>(deletedTransactions);
   
         public ResumeMonth GetResume(int year,int month)
         {
-            ResumeMonth resumeMonth = new ResumeMonth();
+            ResumeMonth resumeMonth = new ResumeMonth(year, month);
 
             using (OutlayAPIManager API_Manager = new OutlayAPIManager())
             {
                 List<TransactionDTO> monthTransaction = API_Manager.GetTransaction(year, month);
 
-                double totalAdjust = monthTransaction.Where(x => x.DetailTransaction.Type == "ADJUST")
-                                                     .Select(x => x.Amount)
-                                                     .Sum();
-
-                double totalSpenses = monthTransaction.Where(x => x.DetailTransaction.Type == "SPENDING")
+                if (monthTransaction != null)
+                {
+                    double totalAdjust = monthTransaction.Where(x => x.DetailTransaction.Type == "ADJUST")
                                                    .Select(x => x.Amount)
                                                    .Sum();
 
-                double totalIncoming = monthTransaction.Where(x => x.DetailTransaction.Type == "INCOMING")
-                                                   .Select(x => x.Amount)
-                                                   .Sum();
+                    double totalSpenses = monthTransaction.Where(x => x.DetailTransaction.Type == "SPENDING")
+                                                       .Select(x => x.Amount)
+                                                       .Sum();
 
-                var groupingCode = monthTransaction.GroupBy(x => x.DetailTransaction.Code)
-                                                   .ToDictionary(key => key.Key, value => value.Sum(x => x.Amount));
+                    double totalIncoming = monthTransaction.Where(x => x.DetailTransaction.Type == "INCOMING")
+                                                       .Select(x => x.Amount)
+                                                       .Sum();
 
-                resumeMonth.Spenses = totalSpenses - totalAdjust;
-                resumeMonth.Incoming = totalIncoming;
-                resumeMonth.GroupCodeTransactions = groupingCode;
+                    var groupingCode = monthTransaction.GroupBy(x => x.DetailTransaction.Code)
+                                                       .ToDictionary(key => key.Key, value => value.Sum(x => x.Amount));
+
+                    resumeMonth.Spenses = totalSpenses - totalAdjust;
+                    resumeMonth.Incoming = totalIncoming;
+                    resumeMonth.GroupCodeTransactions = groupingCode;
+                }
             }
 
             return resumeMonth;
+        }
+
+        public List<ResumeCodeTransaction> GetResumeByCode(int year, int month)
+        {
+            ResumeCodeTransaction resume = new ResumeCodeTransaction();
+            OutlayAPIManager managerAPI = new OutlayAPIManager();
+
+            try
+            {
+                List<TransactionDTO> transactions = managerAPI.GetTransaction(year, month);
+
+                List<ResumeCodeTransaction> listResume = transactions.GroupBy(x => x.DetailTransaction.Code)
+                                                                     .Select(value =>
+                                                                             {
+                                                                                 return new ResumeCodeTransaction()
+                                                                                 {
+                                                                                     Code = value.Key,
+                                                                                     Amount = value.Sum(x => x.Amount),
+                                                                                     Date = new DateTime(year, month, 01)
+                                                                                 };
+                                                                             })
+                                                                     .ToList();
+                return listResume;
+
+            }
+            catch (Exception e)
+            {
+                throw new Exception("Error while procesing resume by code", e);
+            }
+            finally
+            {
+                managerAPI.Dispose();
+            }
         }
 
         public ResultInfo SaveAsBackup(string directory)
@@ -153,17 +191,28 @@ namespace OutlayManagerWF.Manager
 
             if (Directory.Exists(directory))
             {
-                using (OutlayAPIManager apiManager = new OutlayAPIManager())
+                OutlayAPIManager apiManager = new OutlayAPIManager();
+                
+                try
                 {
                     List<TransactionDTO> allTransactions = apiManager.GetAllTransactions();
 
                     string csvFile = WriteTransactionToCSV(allTransactions);
                     string fileName = "Backup_" + DateTime.Now.ToString("ddMMyyyy") + ".csv";
 
-                    using (StreamWriter sw = File.CreateText(directory +"\\"+ fileName))
+                    using (StreamWriter sw = File.CreateText(directory + "\\" + fileName))
                     {
                         sw.WriteLine(csvFile);
-                    } 
+                    }
+                }
+                catch(Exception e)
+                {
+                    result.IsError = true;
+                    result.Message = e.Message;
+                }
+                finally
+                {
+                    apiManager.Dispose();
                 }   
             }
             else

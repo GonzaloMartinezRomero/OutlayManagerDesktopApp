@@ -95,7 +95,7 @@
             this.autoBackupCheck.Size = new System.Drawing.Size(110, 21);
             this.autoBackupCheck.TabIndex = 30;
             this.autoBackupCheck.Text = "Auto Backup";
-            this.autoBackupCheck.UseVisualStyleBackColor = true;
+            this.autoBackupCheck.UseVisualStyleBackColor = true;            
             // 
             // button2
             // 

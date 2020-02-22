@@ -17,6 +17,9 @@ namespace OutlayManagerWF
         private readonly Dictionary<string, int> monthNumberCorrespondence;
         private readonly HashSet<DateTime> formsLoaded;
 
+        private int monthSelected = 0;
+        private int yearSelected = 0;
+
         public MainMenu_MDI()
         {
             InitializeComponent();
@@ -43,16 +46,18 @@ namespace OutlayManagerWF
 
             formsLoaded = new HashSet<DateTime>();
 
-            this.FormClosed += BuckupOnClose;
+            this.FormClosed += BackupOnClose;
             this.autoBackupCheck.Checked = true;
+
+            //Autoload default month selected
+            this.CalendarTransactions_Click(this, null);
         }
 
         private void CalendarTransactions_Click(object sender, EventArgs e)
         {
             try
             {
-                int monthSelected = monthNumberCorrespondence[this.dropDownMonth.SelectedItem.ToString()];
-                int yearSelected = Int32.Parse(this.dropDownYear.SelectedItem.ToString());
+                UpdateSelectedDate();
 
                 DateTime dateSelected = new DateTime(yearSelected, monthSelected, 01);
 
@@ -83,6 +88,12 @@ namespace OutlayManagerWF
             }            
         }
 
+        private void UpdateSelectedDate()
+        {
+            monthSelected = monthNumberCorrespondence[this.dropDownMonth.SelectedItem.ToString()];
+            yearSelected = Int32.Parse(this.dropDownYear.SelectedItem.ToString());
+        }
+
         private void UnloadFormCalendar(object sender, FormClosedEventArgs e)
         {
             if(sender is CalendarTransaction calendarClosed)
@@ -102,15 +113,15 @@ namespace OutlayManagerWF
                 TransactionManager transactionManager = new TransactionManager();
                 ResumeMonth resume =  transactionManager.GetResume(year,month);
 
-                this.textBoxYear.Text = year.ToString();
-                this.textBoxMonth.Text = month.ToString();
+                this.textBoxYear.Text = resume.Date.Year.ToString();
+                this.textBoxMonth.Text = resume.Date.Month.ToString();
                 this.textBoxIncoming.Text = resume.Incoming.ToString() + " €";
                 this.textBoxExpenses.Text = resume.Spenses.ToString() + " €";
                 this.textBoxSaving.Text = (resume.Incoming - resume.Spenses).ToString() + " €";
             }
         }
 
-        private void BuckupOnClose(object sender, EventArgs e)
+        private void BackupOnClose(object sender, EventArgs e)
         {
             if (this.autoBackupCheck.Checked)
             {
@@ -119,7 +130,7 @@ namespace OutlayManagerWF
 
                 if (resultInfo.IsError)
                 {
-                    Dialog d = new Dialog(resultInfo.Message);
+                    Dialog d = new Dialog("Backup has not been executed:" + resultInfo.Message);
                     d.ShowDialog();
                 }
             }
@@ -127,7 +138,9 @@ namespace OutlayManagerWF
 
         private void button2_Click(object sender, EventArgs e)
         {
-            ResumeForm resumeForm = new ResumeForm();
+            UpdateSelectedDate();
+
+            ResumeForm resumeForm = new ResumeForm(this.yearSelected,this.monthSelected);
             resumeForm.MdiParent = this;
 
             this.splitContainer1.Panel2.Controls.Add(resumeForm);
@@ -143,7 +156,7 @@ namespace OutlayManagerWF
         //    using (var fbd = new FolderBrowserDialog())
         //    {
         //        var result = fbd.ShowDialog();
-               
+
         //        string path = fbd.SelectedPath;
 
         //        TransactionManager tm = new TransactionManager();

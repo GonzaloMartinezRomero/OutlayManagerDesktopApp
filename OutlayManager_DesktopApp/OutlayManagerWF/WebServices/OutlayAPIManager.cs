@@ -2,39 +2,47 @@
 using OutlayManagerWF.Model;
 using System;
 using System.Collections.Generic;
-using System.Linq;
+using System.Configuration;
 using System.Net.Http;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace OutlayManagerWF.WebServices
 {
     public class OutlayAPIManager :IDisposable
     {
         private readonly HttpClient client;
-        private const string URI = "http://localhost:51044/Outlay";
+        private readonly string applicationURI;
         private OutlayDataHelper dataHelper = new OutlayDataHelper();
 
         public OutlayAPIManager()
         {
+            applicationURI = ConfigurationManager.AppSettings["applicationURL"] ?? String.Empty;
+
             this.client = new HttpClient();
         }
 
         public List<TransactionDTO> GetAllTransactions()
         {
-            string path = $"{URI}/All";
+            string path = $"{applicationURI}/Outlay/All";
 
-            var response = client.GetAsync(path);
-            var content = response.Result.Content.ReadAsStringAsync().Result;
+            try
+            {
+                var response = client.GetAsync(path);
+                var content = response.Result.Content.ReadAsStringAsync().Result;
 
-            var result = JsonConvert.DeserializeObject<List<TransactionDTO>>(content);
+                var result = JsonConvert.DeserializeObject<List<TransactionDTO>>(content);
 
-            return result;
+                return result;
+            }
+            catch (Exception e)
+            {
+                throw new Exception("Error while getting all transactions", e);
+            }
         }
 
         public List<TransactionDTO> GetTransaction(int year, int month)
         {
-            string path = $"{URI}?year={year}&month={month}";
+            string path = $"{applicationURI}/Outlay?year={year}&month={month}";
 
             var response = client.GetAsync(path);
             var content = response.Result.Content.ReadAsStringAsync().Result;
@@ -46,14 +54,21 @@ namespace OutlayManagerWF.WebServices
 
         public List<string> GetOutlayTypes()
         {
-            string path = "http://localhost:51044/OutlayInfo/TypeOutlays";
+            string path = $"{applicationURI}/OutlayInfo/TypeOutlays";
 
-            List<string> outlayTypes =null;
+            List<string> outlayTypes = null;
 
-            var response = client.GetAsync(path);
-            var content = response.Result.Content.ReadAsStringAsync().Result;
+            try
+            {
+                var response = client.GetAsync(path);
+                var content = response.Result.Content.ReadAsStringAsync().Result;
 
-            outlayTypes= JsonConvert.DeserializeObject<List<string>>(content);
+                outlayTypes = JsonConvert.DeserializeObject<List<string>>(content);
+
+            }catch(Exception e)
+            {
+                throw new Exception($"Error while loading {nameof(this.GetOutlayTypes)}", e);
+            }
 
             return outlayTypes ?? new List<string>();
         }
@@ -61,7 +76,7 @@ namespace OutlayManagerWF.WebServices
         public List<ResultInfo> SaveTransaction(List<TransactionDTO> transactionCollection)
         {
             List<ResultInfo> responseCollection = new List<ResultInfo>();
-            string path = $"{URI}";
+            string path = $"{applicationURI}/Outlay";
 
             foreach (var transactionAux in transactionCollection)
             {
@@ -84,7 +99,7 @@ namespace OutlayManagerWF.WebServices
         public List<ResultInfo> ModifyTransaction(List<TransactionDTO> transactionCollection)
         {
             List<ResultInfo> responseCollection = new List<ResultInfo>();
-            string path = $"{URI}";
+            string path = $"{applicationURI}/Outlay";
 
             foreach (var transactionAux in transactionCollection)
             {
@@ -107,7 +122,7 @@ namespace OutlayManagerWF.WebServices
         public List<ResultInfo> DeleteTransaction(List<TransactionDTO> transactionCollection)
         {
             List<ResultInfo> responseCollection = new List<ResultInfo>();
-            string path = $"{URI}";
+            string path = $"{applicationURI}/Outlay";
 
             foreach (var transactionAux in transactionCollection)
             {

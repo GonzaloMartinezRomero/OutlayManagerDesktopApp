@@ -28,74 +28,57 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.Series series2 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.Series series3 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.Title title1 = new System.Windows.Forms.DataVisualization.Charting.Title();
-            this.chartSpending = new System.Windows.Forms.DataVisualization.Charting.Chart();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            ((System.ComponentModel.ISupportInitialize)(this.chartSpending)).BeginInit();
+            this.dataGridCodeExpenses = new System.Windows.Forms.DataGridView();
+            this.dataGridComparisionDate = new System.Windows.Forms.DataGridView();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridCodeExpenses)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridComparisionDate)).BeginInit();
             this.SuspendLayout();
             // 
-            // chartSpending
+            // dataGridCodeExpenses
             // 
-            chartArea1.Name = "ChartArea1";
-            this.chartSpending.ChartAreas.Add(chartArea1);
-            legend1.Name = "Legend1";
-            this.chartSpending.Legends.Add(legend1);
-            this.chartSpending.Location = new System.Drawing.Point(12, 52);
-            this.chartSpending.Name = "chartSpending";
-            this.chartSpending.Palette = System.Windows.Forms.DataVisualization.Charting.ChartColorPalette.Fire;
-            series1.ChartArea = "ChartArea1";
-            series1.Legend = "Legend1";
-            series1.Name = "Spending";
-            series2.ChartArea = "ChartArea1";
-            series2.Legend = "Legend1";
-            series2.Name = "Incoming";
-            series3.ChartArea = "ChartArea1";
-            series3.Legend = "Legend1";
-            series3.Name = "Saved";
-            this.chartSpending.Series.Add(series1);
-            this.chartSpending.Series.Add(series2);
-            this.chartSpending.Series.Add(series3);
-            this.chartSpending.Size = new System.Drawing.Size(1372, 300);
-            this.chartSpending.TabIndex = 0;
-            this.chartSpending.Text = "chart1";
-            title1.Name = "Titulo";
-            this.chartSpending.Titles.Add(title1);
+            this.dataGridCodeExpenses.AllowUserToAddRows = false;
+            this.dataGridCodeExpenses.AllowUserToDeleteRows = false;
+            this.dataGridCodeExpenses.AllowUserToOrderColumns = true;
+            this.dataGridCodeExpenses.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridCodeExpenses.Location = new System.Drawing.Point(12, 12);
+            this.dataGridCodeExpenses.Name = "dataGridCodeExpenses";
+            this.dataGridCodeExpenses.ReadOnly = true;
+            this.dataGridCodeExpenses.RowHeadersWidth = 51;
+            this.dataGridCodeExpenses.RowTemplate.Height = 24;
+            this.dataGridCodeExpenses.Size = new System.Drawing.Size(625, 412);
+            this.dataGridCodeExpenses.TabIndex = 4;
             // 
-            // textBox1
+            // dataGridComparisionDate
             // 
-            this.textBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox1.Location = new System.Drawing.Point(585, 12);
-            this.textBox1.Multiline = true;
-            this.textBox1.Name = "textBox1";
-            this.textBox1.ReadOnly = true;
-            this.textBox1.Size = new System.Drawing.Size(419, 34);
-            this.textBox1.TabIndex = 3;
-            this.textBox1.Text = "SPENDING BITACORA";
-            this.textBox1.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.dataGridComparisionDate.AllowUserToAddRows = false;
+            this.dataGridComparisionDate.AllowUserToDeleteRows = false;
+            this.dataGridComparisionDate.AllowUserToOrderColumns = true;
+            this.dataGridComparisionDate.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridComparisionDate.Location = new System.Drawing.Point(673, 12);
+            this.dataGridComparisionDate.Name = "dataGridComparisionDate";
+            this.dataGridComparisionDate.ReadOnly = true;
+            this.dataGridComparisionDate.RowHeadersWidth = 51;
+            this.dataGridComparisionDate.RowTemplate.Height = 24;
+            this.dataGridComparisionDate.Size = new System.Drawing.Size(597, 412);
+            this.dataGridComparisionDate.TabIndex = 5;
             // 
             // ResumeForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1396, 751);
-            this.Controls.Add(this.textBox1);
-            this.Controls.Add(this.chartSpending);
+            this.Controls.Add(this.dataGridComparisionDate);
+            this.Controls.Add(this.dataGridCodeExpenses);
             this.Name = "ResumeForm";
             this.Text = "ResumeForm";
-            ((System.ComponentModel.ISupportInitialize)(this.chartSpending)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridCodeExpenses)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridComparisionDate)).EndInit();
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
         #endregion
-
-        private System.Windows.Forms.DataVisualization.Charting.Chart chartSpending;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.DataGridView dataGridCodeExpenses;
+        private System.Windows.Forms.DataGridView dataGridComparisionDate;
     }
 }

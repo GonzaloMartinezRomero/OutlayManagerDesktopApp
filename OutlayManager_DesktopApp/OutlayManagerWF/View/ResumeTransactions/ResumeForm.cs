@@ -1,4 +1,6 @@
-﻿using OutlayManagerWF.Model;
+﻿using OutlayManagerWF.Manager;
+using OutlayManagerWF.Model;
+using OutlayManagerWF.Model.Info;
 using OutlayManagerWF.WebServices;
 using System;
 using System.Collections.Generic;
@@ -10,47 +12,58 @@ namespace OutlayManagerWF.View.ResumeTransactions
 {
     public partial class ResumeForm : Form
     {
-        public ResumeForm()
+        private ResumeForm()
         {
             InitializeComponent();
-            FillSpendingChart();
         }
 
-        private void FillSpendingChart()
+        public ResumeForm(int year, int month) : this()
+        { 
+            FillResumeMonthData(year, month);
+            FillComparisionExpenses(year, month);
+        }
+
+        private void FillComparisionExpenses(int year, int month)
         {
-            this.chartSpending.Name = "Spending Bitacora";
-            this.chartSpending.Series.Clear();
+            List<ResumeMonth> resumeMonthList = new List<ResumeMonth>();
 
-            using (OutlayAPIManager APIManager = new OutlayAPIManager())
+            DateTime dateRequested = new DateTime(year, month, 1);
+
+            TransactionManager trManager = new TransactionManager();
+            resumeMonthList.Add(trManager.GetResume(dateRequested.Year, dateRequested.Month));
+
+            DateTime pastMonth = dateRequested.AddMonths(-1);
+            resumeMonthList.Add(trManager.GetResume(pastMonth.Year, pastMonth.Month));
+
+            DateTime pastYear = dateRequested.AddYears(-1);
+            resumeMonthList.Add(trManager.GetResume(pastYear.Year, pastYear.Month));
+
+            BindingSource bindingSource = new BindingSource
             {
-                List<TransactionDTO> transactionList = APIManager.GetAllTransactions();
-
-                //Fill SPENDING
-                var transactionsValues = transactionList.GroupBy(x => new DateTime(x.Date.Year, x.Date.Month, 01))
-                                                        .OrderBy(x => x.Key)
-                                                        .ToDictionary(key => key.Key, values => values.ToList());                                                   
-
-                var serieSpend = this.chartSpending.Series.Add("Spending");
-                var serieIncoming = this.chartSpending.Series.Add("Incomings");
-                var serieSaved = this.chartSpending.Series.Add("Saved");
-
-                foreach (var transactionGroup in transactionsValues)
+                DataSource = resumeMonthList.Select(x=>  
                 {
-                    double totalSpend = transactionGroup.Value.Where(x => x.DetailTransaction.Type == "SPENDING" || x.DetailTransaction.Type == "ADJUST")
-                                                              .Sum(x => x.Amount);
+                    return new
+                    {
+                        x.Date,
+                        x.Spenses,
+                        x.Incoming
+                    };
+                })
+            };
 
-                    double totalIncoming = transactionGroup.Value.Where(x => x.DetailTransaction.Type == "INCOMING")
-                                                                 .Sum(x => x.Amount);
+            this.dataGridComparisionDate.DataSource = bindingSource;
+        }
 
-                    double totalSave = totalIncoming - totalSpend;
+        private void FillResumeMonthData(int year, int month)
+        {
+            List<ResumeCodeTransaction> resumeTransactions = new TransactionManager().GetResumeByCode(year, month)
+                                                                                     .OrderByDescending(x => x.Amount)
+                                                                                     .ToList();
 
-                    string keyGroupDate = transactionGroup.Key.ToString("MM/yyyy");
+            BindingSource bindingSource = new BindingSource();
+            bindingSource.DataSource = resumeTransactions;
 
-                    serieSpend.Points.AddXY(keyGroupDate, totalSpend);
-                    serieIncoming.Points.AddXY(keyGroupDate, totalIncoming);
-                    serieSaved.Points.AddXY(keyGroupDate, totalSave);
-                }
-            }
+            this.dataGridCodeExpenses.DataSource = bindingSource;
         }
     }
 }
