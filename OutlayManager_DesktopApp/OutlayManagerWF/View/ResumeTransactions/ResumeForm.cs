@@ -67,8 +67,9 @@ namespace OutlayManagerWF.View.ResumeTransactions
             try
             {
                 List<ResumeCodeTransaction> resumeTransactions = new TransactionManager().GetResumeByCode(year, month)
-                                                                                    .OrderByDescending(x => x.Amount)
-                                                                                    .ToList();
+                                                                                         .Where(x => x.Type.ToUpper().Trim() != "INCOMING")
+                                                                                         .OrderByDescending(x => x.Amount)
+                                                                                         .ToList();
 
                 BindingSource bindingSource = new BindingSource();
                 bindingSource.DataSource = resumeTransactions;

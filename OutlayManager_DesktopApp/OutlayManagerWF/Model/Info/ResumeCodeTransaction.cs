@@ -10,6 +10,7 @@ namespace OutlayManagerWF.Model.Info
     {       
         public string Code { get; set; }
         public double Amount { get; set; }
+        public string Type { get; set; }
         public DateTime Date { get; set; }
     }
 }

@@ -165,14 +165,15 @@ namespace OutlayManagerWF.Manager
 
                 List<TransactionDTO> transactions = managerAPI.GetTransaction(year, month);
 
-                List<ResumeCodeTransaction> listResume = transactions.GroupBy(x => x.DetailTransaction.Code)
+                List<ResumeCodeTransaction> listResume = transactions.GroupBy(x => x.DetailTransaction.Code + x.DetailTransaction.Type)
                                                                      .Select(value =>
                                                                              {
                                                                                  return new ResumeCodeTransaction()
                                                                                  {
-                                                                                     Code = value.Key,
+                                                                                     Code = value.FirstOrDefault()?.DetailTransaction.Code,
+                                                                                     Type = value.FirstOrDefault()?.DetailTransaction.Type,
                                                                                      Amount = value.Sum(x => x.Amount),
-                                                                                     Date = new DateTime(year, month, 01)
+                                                                                     Date = new DateTime(year, month, 01),
                                                                                  };
                                                                              })
                                                                      .ToList();
