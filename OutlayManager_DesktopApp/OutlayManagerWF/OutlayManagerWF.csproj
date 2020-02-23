@@ -92,6 +92,7 @@
     <Compile Include="Manager\TransactionManager.cs" />
     <Compile Include="Model\Info\ResumeCodeTransaction.cs" />
     <Compile Include="Model\Info\ResumeMonth.cs" />
+    <Compile Include="Utilities\Normalizer.cs" />
     <Compile Include="View\CalendarTransactionOperations\CalendarTransaction.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -175,7 +176,6 @@
     <EmbeddedResource Include="View\ResumeTransactions\ResumeForm.resx">
       <DependentUpon>ResumeForm.cs</DependentUpon>
     </EmbeddedResource>
-    <None Include="OutlayManagerWF_TemporaryKey.pfx" />
     <None Include="packages.config" />
     <None Include="Properties\DataSources\OutlayManagerWF.Model.DetailTransacionDTO.datasource" />
     <None Include="Properties\DataSources\OutlayManagerWF.Model.TransactionDTO.datasource" />

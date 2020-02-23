@@ -60,7 +60,7 @@ namespace OutlayManagerWF
                 case 0:
                     this.Enabled = false;
                     Dialog dialog = new Dialog("No one elemented has been selected");
-                    dialog.Show();
+                    dialog.ShowDialog();
                     this.Enabled = true;
                     break;
 
@@ -71,7 +71,7 @@ namespace OutlayManagerWF
                     this.Enabled = false;
                     TransactionSettings settings = new TransactionSettings(transactionSelected);
                     settings.OnExecutionResult += ModifyTransaction;
-                    settings.Show();
+                    settings.ShowDialog();
                     this.Enabled = true;
 
                     break;
@@ -79,7 +79,7 @@ namespace OutlayManagerWF
                 default:
                     this.Enabled = false;
                     Dialog dialog2 = new Dialog("Only 1 item must be selected");
-                    dialog2.Show();
+                    dialog2.ShowDialog();
                     this.Enabled = true;
                     break;
                       

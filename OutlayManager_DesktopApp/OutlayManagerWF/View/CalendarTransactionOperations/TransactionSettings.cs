@@ -1,5 +1,6 @@
 ﻿using OutlayManagerWF.Model;
 using OutlayManagerWF.Model.View;
+using OutlayManagerWF.Utilities;
 using OutlayManagerWF.WebServices;
 using System;
 using System.Collections.Generic;
@@ -42,7 +43,7 @@ namespace OutlayManagerWF
         public TransactionSettings(TransactionView transactionView) : this() 
         {
             this.type_text.SelectedItem = transactionView.Type.ToString();
-            this.text_amount.Text = transactionView.Amount.ToString();
+            this.text_amount.Text = Normalizer.NormalizeAmount(transactionView.Amount);
             this.dateTimePicker1.Value = transactionView.Date;
             this.text_Codigo.Text = transactionView.Code;
             this.text_description.Text = transactionView.Description;
@@ -83,16 +84,16 @@ namespace OutlayManagerWF
                 transaction.DetailTransaction.Type = typeValue;
             }
 
-            string amount = this.text_amount.Text;
-            double amountResult = 0.0d;
-            if (!Double.TryParse(amount,System.Globalization.NumberStyles.AllowDecimalPoint,CultureInfo.InvariantCulture, out amountResult))
+            double? amount = Normalizer.NormalizeAmount(this.text_amount.Text);
+            
+            if (amount == null || !amount.HasValue)
             {
                 this.text_amount.BackColor = Color.Red;
                 isAllOk = false;
             }
             else
             {
-                transaction.Amount = amountResult;
+                transaction.Amount = amount.Value;
             }
 
             transaction.Date = this.dateTimePicker1.Value;
