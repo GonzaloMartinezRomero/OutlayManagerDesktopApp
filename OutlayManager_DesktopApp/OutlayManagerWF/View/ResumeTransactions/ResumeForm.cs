@@ -67,7 +67,7 @@ namespace OutlayManagerWF.View.ResumeTransactions
             try
             {
                 List<ResumeCodeTransaction> resumeTransactions = new TransactionManager().GetResumeByCode(year, month)
-                                                                                         .Where(x => x.Type.ToUpper().Trim() != "INCOMING")
+                                                                                         .Where(x => x.Type.ToUpper().Trim() != OutlayDataHelper.OutlayTypesEnum.INCOMING.ToString())
                                                                                          .OrderByDescending(x => x.Amount)
                                                                                          .ToList();
 

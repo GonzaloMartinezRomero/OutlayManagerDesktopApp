@@ -111,11 +111,15 @@ namespace OutlayManagerWF
                 TransactionManager transactionManager = new TransactionManager();
                 ResumeMonth resume =  transactionManager.GetResume(year,month);
 
+                double totalAmount = transactionManager.GetTotalAmount();
+
                 this.textBoxYear.Text = resume.Date.Year.ToString();
                 this.textBoxMonth.Text = resume.Date.Month.ToString();
                 this.textBoxIncoming.Text = resume.Incoming.ToString() + " €";
                 this.textBoxExpenses.Text = resume.Spenses.ToString() + " €";
                 this.textBoxSaving.Text = (resume.Incoming - resume.Spenses).ToString() + " €";
+                
+                this.textBoxTotalAmount.Text = $"{Math.Round(totalAmount,3)} €";
             }
         }
 

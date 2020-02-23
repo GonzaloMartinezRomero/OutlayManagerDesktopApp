@@ -18,8 +18,7 @@ namespace OutlayManagerWF
         private Dictionary<DateTime, List<TransactionDTO>> calendarTransaction= new Dictionary<DateTime, List<TransactionDTO>>();
 
         private readonly OutlayAPIManager outlayServiceAPI;
-        private readonly OutlayDataHelper dataHelper;
-
+        
         public readonly int year, month;
 
         public delegate void NotifyChanges(object sender, EventArgs e);
@@ -47,10 +46,7 @@ namespace OutlayManagerWF
             this.month = month;
 
             outlayServiceAPI = new OutlayAPIManager();
-            dataHelper = new OutlayDataHelper();
-
-            dataHelper.SetOutlayTypes(outlayServiceAPI.GetOutlayTypes());
-
+            
             InitializeAllComponents();            
         }
 

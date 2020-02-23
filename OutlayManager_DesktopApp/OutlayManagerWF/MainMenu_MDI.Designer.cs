@@ -50,6 +50,8 @@
             this.textBox5 = new System.Windows.Forms.TextBox();
             this.textBox8 = new System.Windows.Forms.TextBox();
             this.bindingSource1 = new System.Windows.Forms.BindingSource(this.components);
+            this.textBoxTotalAmount = new System.Windows.Forms.TextBox();
+            this.textBoxTotal = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.SuspendLayout();
@@ -64,6 +66,8 @@
             // 
             // splitContainer1.Panel1
             // 
+            this.splitContainer1.Panel1.Controls.Add(this.textBoxTotalAmount);
+            this.splitContainer1.Panel1.Controls.Add(this.textBoxTotal);
             this.splitContainer1.Panel1.Controls.Add(this.autoBackupCheck);
             this.splitContainer1.Panel1.Controls.Add(this.button2);
             this.splitContainer1.Panel1.Controls.Add(this.textBoxMonth);
@@ -84,7 +88,7 @@
             this.splitContainer1.Panel1.Controls.Add(this.textBox5);
             this.splitContainer1.Panel1.Controls.Add(this.textBox8);
             this.splitContainer1.Size = new System.Drawing.Size(1407, 591);
-            this.splitContainer1.SplitterDistance = 226;
+            this.splitContainer1.SplitterDistance = 233;
             this.splitContainer1.TabIndex = 14;
             // 
             // autoBackupCheck
@@ -95,7 +99,7 @@
             this.autoBackupCheck.Size = new System.Drawing.Size(110, 21);
             this.autoBackupCheck.TabIndex = 30;
             this.autoBackupCheck.Text = "Auto Backup";
-            this.autoBackupCheck.UseVisualStyleBackColor = true;            
+            this.autoBackupCheck.UseVisualStyleBackColor = true;
             // 
             // button2
             // 
@@ -112,7 +116,7 @@
             this.textBoxMonth.Location = new System.Drawing.Point(100, 332);
             this.textBoxMonth.Name = "textBoxMonth";
             this.textBoxMonth.ReadOnly = true;
-            this.textBoxMonth.Size = new System.Drawing.Size(94, 22);
+            this.textBoxMonth.Size = new System.Drawing.Size(123, 22);
             this.textBoxMonth.TabIndex = 27;
             this.textBoxMonth.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
@@ -121,7 +125,7 @@
             this.textBoxYear.Location = new System.Drawing.Point(100, 292);
             this.textBoxYear.Name = "textBoxYear";
             this.textBoxYear.ReadOnly = true;
-            this.textBoxYear.Size = new System.Drawing.Size(94, 22);
+            this.textBoxYear.Size = new System.Drawing.Size(123, 22);
             this.textBoxYear.TabIndex = 26;
             this.textBoxYear.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
@@ -196,7 +200,7 @@
             this.textBoxSaving.Location = new System.Drawing.Point(99, 450);
             this.textBoxSaving.Name = "textBoxSaving";
             this.textBoxSaving.ReadOnly = true;
-            this.textBoxSaving.Size = new System.Drawing.Size(95, 22);
+            this.textBoxSaving.Size = new System.Drawing.Size(124, 22);
             this.textBoxSaving.TabIndex = 18;
             this.textBoxSaving.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
@@ -205,7 +209,7 @@
             this.textBoxExpenses.Location = new System.Drawing.Point(100, 411);
             this.textBoxExpenses.Name = "textBoxExpenses";
             this.textBoxExpenses.ReadOnly = true;
-            this.textBoxExpenses.Size = new System.Drawing.Size(94, 22);
+            this.textBoxExpenses.Size = new System.Drawing.Size(123, 22);
             this.textBoxExpenses.TabIndex = 17;
             this.textBoxExpenses.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
@@ -214,7 +218,7 @@
             this.textBoxIncoming.Location = new System.Drawing.Point(100, 371);
             this.textBoxIncoming.Name = "textBoxIncoming";
             this.textBoxIncoming.ReadOnly = true;
-            this.textBoxIncoming.Size = new System.Drawing.Size(94, 22);
+            this.textBoxIncoming.Size = new System.Drawing.Size(123, 22);
             this.textBoxIncoming.TabIndex = 16;
             this.textBoxIncoming.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
@@ -272,6 +276,27 @@
             this.textBox8.Text = "TRANSACTIONS";
             this.textBox8.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
+            // textBoxTotalAmount
+            // 
+            this.textBoxTotalAmount.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textBoxTotalAmount.Location = new System.Drawing.Point(99, 490);
+            this.textBoxTotalAmount.Name = "textBoxTotalAmount";
+            this.textBoxTotalAmount.ReadOnly = true;
+            this.textBoxTotalAmount.Size = new System.Drawing.Size(124, 24);
+            this.textBoxTotalAmount.TabIndex = 32;
+            this.textBoxTotalAmount.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // textBoxTotal
+            // 
+            this.textBoxTotal.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textBoxTotal.Location = new System.Drawing.Point(16, 490);
+            this.textBoxTotal.Name = "textBoxTotal";
+            this.textBoxTotal.ReadOnly = true;
+            this.textBoxTotal.Size = new System.Drawing.Size(77, 24);
+            this.textBoxTotal.TabIndex = 31;
+            this.textBoxTotal.Text = "Total";
+            this.textBoxTotal.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
             // MainMenu_MDI
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -313,5 +338,7 @@
         private System.Windows.Forms.TextBox textBox11;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.CheckBox autoBackupCheck;
+        private System.Windows.Forms.TextBox textBoxTotalAmount;
+        private System.Windows.Forms.TextBox textBoxTotal;
     }
 }

@@ -8,11 +8,18 @@ namespace OutlayManagerWF.WebServices
 {
     public sealed class OutlayDataHelper
     {
-        public static List<string> OutlayTypes { get; private set; }
-
-        public void SetOutlayTypes(List<string> outlayTypesList)
+        public enum OutlayTypesEnum
         {
-           OutlayTypes = outlayTypesList;
+            INCOMING,
+            SPENDING,
+            ADJUST
+        }
+
+        public static List<string> OutlayTypes {
+            get
+            {
+                return Enum.GetNames(typeof(OutlayTypesEnum)).ToList();
+            }
         }
 
     }

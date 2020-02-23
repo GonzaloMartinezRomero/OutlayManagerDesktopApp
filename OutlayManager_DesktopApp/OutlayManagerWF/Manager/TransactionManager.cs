@@ -131,15 +131,15 @@ namespace OutlayManagerWF.Manager
 
                 if (monthTransaction != null)
                 {
-                    double totalAdjust = monthTransaction.Where(x => x.DetailTransaction.Type == "ADJUST")
+                    double totalAdjust = monthTransaction.Where(x => x.DetailTransaction.Type == OutlayDataHelper.OutlayTypesEnum.ADJUST.ToString())
                                                    .Select(x => x.Amount)
                                                    .Sum();
 
-                    double totalSpenses = monthTransaction.Where(x => x.DetailTransaction.Type == "SPENDING")
+                    double totalSpenses = monthTransaction.Where(x => x.DetailTransaction.Type == OutlayDataHelper.OutlayTypesEnum.SPENDING.ToString())
                                                        .Select(x => x.Amount)
                                                        .Sum();
 
-                    double totalIncoming = monthTransaction.Where(x => x.DetailTransaction.Type == "INCOMING")
+                    double totalIncoming = monthTransaction.Where(x => x.DetailTransaction.Type == OutlayDataHelper.OutlayTypesEnum.INCOMING.ToString())
                                                        .Select(x => x.Amount)
                                                        .Sum();
 
@@ -186,6 +186,27 @@ namespace OutlayManagerWF.Manager
             }
         }
 
+        public double GetTotalAmount()
+        {  
+            OutlayAPIManager apiManager = new OutlayAPIManager();
+
+            List<TransactionDTO> allTransactionsList = apiManager.GetAllTransactions();
+
+            double totalIncomings = allTransactionsList.Where(x => x.DetailTransaction.Type == OutlayDataHelper.OutlayTypesEnum.INCOMING.ToString())
+                                                       .Select(x => x.Amount)
+                                                       .Sum();
+
+            double totalSpenses = allTransactionsList.Where(x => x.DetailTransaction.Type == OutlayDataHelper.OutlayTypesEnum.SPENDING.ToString())
+                                                       .Select(x => x.Amount)
+                                                       .Sum();
+
+            double totalAdjust = allTransactionsList.Where(x => x.DetailTransaction.Type == OutlayDataHelper.OutlayTypesEnum.ADJUST.ToString())
+                                                     .Select(x => x.Amount)
+                                                     .Sum();
+
+            return totalIncomings - totalSpenses + totalAdjust;
+        }
+
         public ResultInfo SaveBackupAsCsv()
         {
             ResultInfo result = new ResultInfo() { IsError = false , Message="Save succesfuly"};
@@ -221,28 +242,6 @@ namespace OutlayManagerWF.Manager
             }
 
             return result;
-        }
-
-        private string WriteTransactionToCSV(List<TransactionDTO> allTransactions)
-        {
-            const string HEADER = "FECHA;TIPO_GASTO;CANTIDAD;CODIGO;DESCRIPCION";
-            StringBuilder strBuilder = new StringBuilder();
-
-            strBuilder.AppendLine(HEADER);
-
-            foreach(TransactionDTO transactionAux in allTransactions)
-            {
-                List<string> row = new List<string>();
-                row.Add(transactionAux.Date.ToString("yyyy/MM/dd"));
-                row.Add(transactionAux.DetailTransaction.Type);
-                row.Add(transactionAux.Amount.ToString());
-                row.Add(transactionAux.DetailTransaction.Code);
-                row.Add(transactionAux.DetailTransaction.Description);
-
-                strBuilder.AppendLine(String.Join(";", row));
-            }
-
-            return strBuilder.ToString();
         }
 
         public void LoadTransactionToBDFromCSV(string path)
@@ -282,6 +281,28 @@ namespace OutlayManagerWF.Manager
             {
                 throw new Exception($"Path {path} not found");
             }
+        }
+
+        private string WriteTransactionToCSV(List<TransactionDTO> allTransactions)
+        {
+            const string HEADER = "FECHA;TIPO_GASTO;CANTIDAD;CODIGO;DESCRIPCION";
+            StringBuilder strBuilder = new StringBuilder();
+
+            strBuilder.AppendLine(HEADER);
+
+            foreach (TransactionDTO transactionAux in allTransactions)
+            {
+                List<string> row = new List<string>();
+                row.Add(transactionAux.Date.ToString("yyyy/MM/dd"));
+                row.Add(transactionAux.DetailTransaction.Type);
+                row.Add(transactionAux.Amount.ToString());
+                row.Add(transactionAux.DetailTransaction.Code);
+                row.Add(transactionAux.DetailTransaction.Description);
+
+                strBuilder.AppendLine(String.Join(";", row));
+            }
+
+            return strBuilder.ToString();
         }
     }
 }
