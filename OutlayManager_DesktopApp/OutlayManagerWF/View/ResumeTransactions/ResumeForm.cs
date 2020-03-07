@@ -20,10 +20,10 @@ namespace OutlayManagerWF.View.ResumeTransactions
         public ResumeForm(int year, int month) : this()
         { 
             FillResumeMonthData(year, month);
-            FillComparisionExpenses(year, month);
+            FillComparationExpenses(year, month);
         }
 
-        private void FillComparisionExpenses(int year, int month)
+        private void FillComparationExpenses(int year, int month)
         {
             try
             {
@@ -48,7 +48,8 @@ namespace OutlayManagerWF.View.ResumeTransactions
                         {
                             x.Date,
                             x.Spenses,
-                            x.Incoming
+                            x.Incoming,
+                            Saving = Math.Round(x.Incoming - x.Spenses,2)
                         };
                     })
                 };

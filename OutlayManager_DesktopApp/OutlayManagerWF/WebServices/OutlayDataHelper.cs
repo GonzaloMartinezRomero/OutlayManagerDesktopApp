@@ -22,5 +22,20 @@ namespace OutlayManagerWF.WebServices
             }
         }
 
+        public static bool IsCorrectOutlayType(string outlayType)
+        {
+            return Enum.TryParse(outlayType, out OutlayTypesEnum typeAux);
+        }
+
+        public static OutlayTypesEnum? GetOutlayType(string outlayType)
+        {
+            OutlayTypesEnum? typeParsed = null;
+
+            if (Enum.TryParse(outlayType, out OutlayTypesEnum typeAux))
+                typeParsed = typeAux;
+
+            return typeParsed;
+        }
+
     }
 }

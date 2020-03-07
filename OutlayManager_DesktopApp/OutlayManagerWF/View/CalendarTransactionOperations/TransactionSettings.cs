@@ -4,47 +4,43 @@ using OutlayManagerWF.Utilities;
 using OutlayManagerWF.WebServices;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Globalization;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
+using static OutlayManagerWF.WebServices.OutlayDataHelper;
 
 namespace OutlayManagerWF
 {
     public partial class TransactionSettings : Form
-    {
-        private readonly HashSet<string> spendTypeList;             
+    {   
         private readonly int transactionID;
 
         private readonly int internalTransactionID;
         private readonly TransactionDTO.SourceGeneration generationSource;
 
         public event BuilderTransactionDTO OnExecutionResult;
-        public delegate void BuilderTransactionDTO(TransactionDTO transactionResult);        
-
-        private TransactionSettings() 
+        public delegate void BuilderTransactionDTO(TransactionDTO transactionResult);
+        
+        private TransactionSettings()
         {
             InitializeComponent();
 
-            spendTypeList = new HashSet<string>(OutlayDataHelper.OutlayTypes);
-            this.type_text.Items.AddRange(spendTypeList.ToArray());
+            this.textBoxSpendType.ReadOnly = true;
+            this.dateTimeSpend.Enabled = false;
         }
 
-        public TransactionSettings(DateTime date) : this()
+        public TransactionSettings(DateTime date, OutlayTypesEnum typeOutlay) : this()
         {
-            this.dateTimePicker1.Value = date;
+            this.dateTimeSpend.Value = date;
+            this.textBoxSpendType.Text = typeOutlay.ToString();
             this.generationSource = TransactionDTO.SourceGeneration.NewTransaction;
         }
 
         public TransactionSettings(TransactionView transactionView) : this() 
         {
-            this.type_text.SelectedItem = transactionView.Type.ToString();
+            this.textBoxSpendType.Text = transactionView.Type;
             this.text_amount.Text = Normalizer.NormalizeAmount(transactionView.Amount);
-            this.dateTimePicker1.Value = transactionView.Date;
+            this.dateTimeSpend.Value = transactionView.Date;
             this.text_Codigo.Text = transactionView.Code;
             this.text_description.Text = transactionView.Description;
             this.transactionID = transactionView.ID;
@@ -73,15 +69,15 @@ namespace OutlayManagerWF
                 DetailTransaction = new DetailTransacionDTO()
             };
 
-            string typeValue = this.type_text.SelectedItem?.ToString() ?? String.Empty;
-            if (!spendTypeList.Contains(typeValue))
+            string typeTransactionSelected = this.textBoxSpendType.Text;
+            if (!IsCorrectOutlayType(typeTransactionSelected))
             {
-                this.type_text.BackColor = Color.Red;
+                this.textBoxSpendType.BackColor = Color.Red;
                 isAllOk = false;
             }
             else
             {
-                transaction.DetailTransaction.Type = typeValue;
+                transaction.DetailTransaction.Type = typeTransactionSelected;
             }
 
             double? amount = Normalizer.NormalizeAmount(this.text_amount.Text);
@@ -96,7 +92,7 @@ namespace OutlayManagerWF
                 transaction.Amount = amount.Value;
             }
 
-            transaction.Date = this.dateTimePicker1.Value;
+            transaction.Date = this.dateTimeSpend.Value;
 
             transaction.DetailTransaction.Description = this.text_description.Text;
             transaction.DetailTransaction.Code = this.text_Codigo.Text;

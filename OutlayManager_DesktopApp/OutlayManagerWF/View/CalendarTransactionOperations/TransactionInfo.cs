@@ -9,7 +9,7 @@ using System.Data;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
-
+using static OutlayManagerWF.WebServices.OutlayDataHelper;
 
 namespace OutlayManagerWF
 {
@@ -69,6 +69,7 @@ namespace OutlayManagerWF
                     TransactionView transactionSelected = (TransactionView)rowSelected[0].DataBoundItem;
 
                     this.Enabled = false;
+
                     TransactionSettings settings = new TransactionSettings(transactionSelected);
                     settings.OnExecutionResult += ModifyTransaction;
                     settings.ShowDialog();
@@ -86,10 +87,11 @@ namespace OutlayManagerWF
             }
         }
 
-        private void Button_NewTransaction(object sender, EventArgs e)
+        private void Button_NewTransaction(OutlayTypesEnum typeOutlay)
         {
-            TransactionSettings settings = new TransactionSettings(dateSelected);
+            TransactionSettings settings = new TransactionSettings(dateSelected, typeOutlay);
             settings.OnExecutionResult += AddNewTransaction;
+
 
             this.Enabled = false;
             settings.Show();
@@ -214,5 +216,11 @@ namespace OutlayManagerWF
 
             this.Enabled = true;
         }
+
+        private void buttonNewIncoming_Click(object sender, EventArgs e) => Button_NewTransaction(OutlayTypesEnum.INCOMING);
+       
+        private void buttonNewSpending_Click(object sender, EventArgs e) => Button_NewTransaction(OutlayTypesEnum.SPENDING);
+      
+        private void buttonNewAdjust_Click(object sender, EventArgs e) => Button_NewTransaction(OutlayTypesEnum.ADJUST);
     }
 }
