@@ -123,7 +123,7 @@ namespace OutlayManagerWF
                 this.textBoxSaving.Text = Normalizer.SpainFormatAmount(savingAmount);
                 this.textBoxSaving.BackColor = (savingAmount > 0) ? Color.GreenYellow : Color.Red;
 
-                double totalAmount = transactionManager.GetTotalAmount();
+                double totalAmount = transactionManager.GetTotalAmount() + resume.Adjust;
                 this.textBoxTotalAmount.Text = Normalizer.SpainFormatAmount(totalAmount);
             }
         }

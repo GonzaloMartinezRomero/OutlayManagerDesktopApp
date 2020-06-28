@@ -144,8 +144,9 @@ namespace OutlayManagerWF.Manager
                     var groupingCode = monthTransaction.GroupBy(x => x.DetailTransaction.Code)
                                                        .ToDictionary(key => key.Key, value => value.Sum(x => x.Amount));
 
-                    resumeMonth.Spenses = totalSpenses - totalAdjust;
+                    resumeMonth.Spenses = totalSpenses;
                     resumeMonth.Incoming = totalIncoming;
+                    resumeMonth.Adjust = totalAdjust;
                     resumeMonth.GroupCodeTransactions = groupingCode;
                 }
             }
