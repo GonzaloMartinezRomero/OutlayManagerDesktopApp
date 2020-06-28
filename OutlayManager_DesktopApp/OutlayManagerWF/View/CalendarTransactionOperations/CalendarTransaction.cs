@@ -1,4 +1,5 @@
-﻿using OutlayManagerWF.Model;
+﻿using OutlayManagerWF.Manager;
+using OutlayManagerWF.Model;
 using OutlayManagerWF.WebServices;
 using System;
 using System.Collections.Generic;
@@ -40,7 +41,7 @@ namespace OutlayManagerWF
             InitializeComponent();
         }
 
-        public CalendarTransaction(int year, int month):this()
+        public CalendarTransaction(int year, int month) : this()
         {
             this.year = year;
             this.month = month;
@@ -88,7 +89,8 @@ namespace OutlayManagerWF
         private void InitializeMatrixCalendarControllers(DateTime currentDay, Dictionary<DateTime, List<TransactionDTO>> calendarTransaction)
         {
             //Initialize month
-            this.TextCurrentMonth.Text = currentDay.ToString("MMMM", CultureInfo.CurrentCulture).ToUpper();
+            string monthTitle = $"{currentDay.ToString("MMMM", CultureInfo.CurrentCulture).ToUpper()} {currentDay.Year.ToString()}";
+            this.TextCurrentMonth.Text = monthTitle;
 
             //Initialize matrix days
             DateTime initMonth = new DateTime(currentDay.Year, currentDay.Month, 1);
@@ -113,8 +115,8 @@ namespace OutlayManagerWF
 
                     textBoxDayMatrix.Text = initMonth.ToShortDateString() + Utilities.TextBuilder.EndOfLineCustom("-", 30);
                     
-                    if (calendarTransaction.ContainsKey(initMonth))                    
-                        textBoxDayMatrix.Text += Utilities.TextBuilder.TransactionToText(calendarTransaction[initMonth]) + Utilities.TextBuilder.EndOfLineCustom(); 
+                    if (calendarTransaction.ContainsKey(initMonth))
+                         textBoxDayMatrix.Text += Utilities.TextBuilder.TransactionToText(calendarTransaction[initMonth]) + Utilities.TextBuilder.EndOfLineCustom();                        
                 }         
 
                 colPosition += 1;
@@ -138,9 +140,18 @@ namespace OutlayManagerWF
                 List<TransactionDTO> transactionsSelected = (calendarTransaction.ContainsKey(date)) ? calendarTransaction[date] : null;
                 this.Enabled = false;
 
-                TransactionInfo formTransaction = new TransactionInfo(transactionsSelected, date);
-                formTransaction.FormClosed += RefreshCalendarForm;
-                formTransaction.Show();
+                try
+                {
+                    TransactionInfo formTransaction = new TransactionInfo(transactionsSelected, date);
+                    formTransaction.FormClosed += RefreshCalendarForm;
+                    formTransaction.Show();
+
+                }catch(Exception except)
+                {
+                    DialogManager dm = new DialogManager();
+                    dm.ShowDialog(DialogManager.DialogLevel.Exception, except.Message, this);
+                }
+                
             }
         }
 

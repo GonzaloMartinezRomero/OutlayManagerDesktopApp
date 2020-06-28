@@ -1,10 +1,12 @@
 ﻿using OutlayManagerWF.Manager;
 using OutlayManagerWF.Model;
 using OutlayManagerWF.Model.Info;
+using OutlayManagerWF.Utilities;
 using OutlayManagerWF.View.ResumeTransactions;
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Drawing;
 using System.Globalization;
 using System.Linq;
 using System.Windows.Forms;
@@ -110,16 +112,19 @@ namespace OutlayManagerWF
 
                 TransactionManager transactionManager = new TransactionManager();
                 ResumeMonth resume =  transactionManager.GetResume(year,month);
-
-                double totalAmount = transactionManager.GetTotalAmount();
-
+                
                 this.textBoxYear.Text = resume.Date.Year.ToString();
                 this.textBoxMonth.Text = resume.Date.Month.ToString();
-                this.textBoxIncoming.Text = resume.Incoming.ToString() + " €";
-                this.textBoxExpenses.Text = resume.Spenses.ToString() + " €";
-                this.textBoxSaving.Text = (resume.Incoming - resume.Spenses).ToString() + " €";
-                
-                this.textBoxTotalAmount.Text = $"{Math.Round(totalAmount,3)} €";
+
+                this.textBoxIncoming.Text = Normalizer.SpainFormatAmount(resume.Incoming);
+                this.textBoxExpenses.Text = Normalizer.SpainFormatAmount(resume.Spenses);
+
+                double savingAmount = Math.Round(resume.Incoming - resume.Spenses, 2);
+                this.textBoxSaving.Text = Normalizer.SpainFormatAmount(savingAmount);
+                this.textBoxSaving.BackColor = (savingAmount > 0) ? Color.GreenYellow : Color.Red;
+
+                double totalAmount = transactionManager.GetTotalAmount();
+                this.textBoxTotalAmount.Text = Normalizer.SpainFormatAmount(totalAmount);
             }
         }
 
@@ -127,8 +132,8 @@ namespace OutlayManagerWF
         {
             if (this.autoBackupCheck.Checked)
             {
-                TransactionManager transacionManager = new TransactionManager();
-                ResultInfo resultInfo = transacionManager.SaveBackupAsCsv();
+                BackupManager bckManager = new BackupManager();
+                ResultInfo resultInfo = bckManager.SaveBackupAsCsv();
 
                 if (resultInfo.IsError)
                 {
@@ -151,6 +156,11 @@ namespace OutlayManagerWF
 
             resumeForm.BringToFront();
             resumeForm.Show();
+        }
+
+        private void buttonBackupFolder_Click(object sender, EventArgs e)
+        {
+            new BackupManager().OpenBackupDirectory();
         }
 
         /*    VERY DANGEROUS CODE    */

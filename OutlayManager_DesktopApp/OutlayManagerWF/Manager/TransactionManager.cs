@@ -13,9 +13,7 @@ using System.Threading.Tasks;
 namespace OutlayManagerWF.Manager
 {
     public class TransactionManager
-    {
-        public const string PATH_BACKUP_KEY = "PathBackup";
-
+    {  
         private readonly List<TransactionDTO> addedTransactions;
         private readonly List<TransactionDTO> modifiedTransactions;
         private readonly List<TransactionDTO> deletedTransactions;
@@ -186,6 +184,23 @@ namespace OutlayManagerWF.Manager
             }
         }
 
+        public List<string> TransactionCodes()
+        {
+            List<string> transactionCodesList = null;
+
+            using (OutlayAPIManager managerAPI = new OutlayAPIManager())
+            {
+                List<TransactionDTO> transactions = managerAPI.GetAllTransactions();
+
+                transactionCodesList = transactions.Select(x => x.DetailTransaction.Code)
+                                                   .Distinct()
+                                                   .ToList();
+
+            }
+
+            return transactionCodesList ?? new List<string>();
+        }
+
         public double GetTotalAmount()
         {  
             OutlayAPIManager apiManager = new OutlayAPIManager();
@@ -205,43 +220,6 @@ namespace OutlayManagerWF.Manager
                                                      .Sum();
 
             return totalIncomings - totalSpenses + totalAdjust;
-        }
-
-        public ResultInfo SaveBackupAsCsv()
-        {
-            ResultInfo result = new ResultInfo() { IsError = false , Message="Save succesfuly"};
-
-            string directory = ConfigurationManager.AppSettings.Get(PATH_BACKUP_KEY);
-
-            if (Directory.Exists(directory))
-            {    
-                try
-                {
-                    OutlayAPIManager apiManager = new OutlayAPIManager();
-
-                    List<TransactionDTO> allTransactions = apiManager.GetAllTransactions();
-
-                    string csvFile = WriteTransactionToCSV(allTransactions);
-                    string fileName = "Backup_" + DateTime.Now.ToString("ddMMyyyy") + ".csv";
-
-                    using (StreamWriter sw = File.CreateText(directory + "\\" + fileName))
-                    {
-                        sw.WriteLine(csvFile);
-                    }
-                }
-                catch(Exception e)
-                {
-                    result.IsError = true;
-                    result.Message = e.Message;
-                }
-            }
-            else
-            {
-                result.IsError = true;
-                result.Message = $"Directory: {directory} is not correct";
-            }
-
-            return result;
         }
 
         public void LoadTransactionToBDFromCSV(string path)
@@ -281,28 +259,6 @@ namespace OutlayManagerWF.Manager
             {
                 throw new Exception($"Path {path} not found");
             }
-        }
-
-        private string WriteTransactionToCSV(List<TransactionDTO> allTransactions)
-        {
-            const string HEADER = "FECHA;TIPO_GASTO;CANTIDAD;CODIGO;DESCRIPCION";
-            StringBuilder strBuilder = new StringBuilder();
-
-            strBuilder.AppendLine(HEADER);
-
-            foreach (TransactionDTO transactionAux in allTransactions)
-            {
-                List<string> row = new List<string>();
-                row.Add(transactionAux.Date.ToString("yyyy/MM/dd"));
-                row.Add(transactionAux.DetailTransaction.Type);
-                row.Add(transactionAux.Amount.ToString());
-                row.Add(transactionAux.DetailTransaction.Code);
-                row.Add(transactionAux.DetailTransaction.Description);
-
-                strBuilder.AppendLine(String.Join(";", row));
-            }
-
-            return strBuilder.ToString();
-        }
+        }     
     }
 }

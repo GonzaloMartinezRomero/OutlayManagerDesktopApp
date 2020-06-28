@@ -13,10 +13,11 @@ namespace OutlayManagerWF.Utilities
         {
             StringBuilder strBuilder = new StringBuilder();
 
-            foreach (TransactionDTO transaction in transactionList)
-            {
+            IOrderedEnumerable<TransactionDTO> orderedTransactions = transactionList.OrderBy(x => x.DetailTransaction.Type)
+                                                                                    .ThenByDescending(y => y.Amount); 
+
+            foreach (TransactionDTO transaction in orderedTransactions)
                 strBuilder.AppendLine(TransactionToCalendarText(transaction));
-            }
 
             return strBuilder.ToString();
         }

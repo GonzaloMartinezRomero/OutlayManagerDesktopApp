@@ -88,6 +88,7 @@
     <Reference Include="WindowsFormsIntegration" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Manager\BackupManager.cs" />
     <Compile Include="Manager\DialogManager.cs" />
     <Compile Include="Manager\TransactionManager.cs" />
     <Compile Include="Model\Info\ResumeCodeTransaction.cs" />

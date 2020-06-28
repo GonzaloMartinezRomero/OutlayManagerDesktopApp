@@ -92,7 +92,6 @@ namespace OutlayManagerWF
             TransactionSettings settings = new TransactionSettings(dateSelected, typeOutlay);
             settings.OnExecutionResult += AddNewTransaction;
 
-
             this.Enabled = false;
             settings.Show();
             this.Enabled = true;

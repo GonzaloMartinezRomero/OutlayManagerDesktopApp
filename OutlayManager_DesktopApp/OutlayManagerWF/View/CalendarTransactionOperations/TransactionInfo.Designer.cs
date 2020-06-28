@@ -28,25 +28,25 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.buttonModificar = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.button2 = new System.Windows.Forms.Button();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.buttonNewAdjust = new System.Windows.Forms.Button();
             this.buttonNewSpending = new System.Windows.Forms.Button();
             this.buttonNewIncoming = new System.Windows.Forms.Button();
-            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.textBox1 = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
             this.splitContainer1.SuspendLayout();
-            this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
+            this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
             // buttonModificar
@@ -54,7 +54,7 @@
             this.buttonModificar.Location = new System.Drawing.Point(16, 34);
             this.buttonModificar.Name = "buttonModificar";
             this.buttonModificar.Size = new System.Drawing.Size(133, 40);
-            this.buttonModificar.TabIndex = 2;
+            this.buttonModificar.TabIndex = 0;
             this.buttonModificar.Text = "Modify";
             this.buttonModificar.UseVisualStyleBackColor = true;
             this.buttonModificar.Click += new System.EventHandler(this.ButtonModify_Click);
@@ -64,7 +64,7 @@
             this.button3.Location = new System.Drawing.Point(16, 92);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(133, 40);
-            this.button3.TabIndex = 3;
+            this.button3.TabIndex = 1;
             this.button3.Text = "Delete";
             this.button3.UseVisualStyleBackColor = true;
             this.button3.Click += new System.EventHandler(this.Button_Delete);
@@ -80,15 +80,15 @@
             this.dataGridView1.BackgroundColor = System.Drawing.Color.Moccasin;
             this.dataGridView1.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Sunken;
             this.dataGridView1.ColumnHeadersHeight = 29;
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle4.Padding = new System.Windows.Forms.Padding(3, 1, 3, 1);
-            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataGridView1.DefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle1.Padding = new System.Windows.Forms.Padding(3, 1, 3, 1);
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridView1.DefaultCellStyle = dataGridViewCellStyle1;
             this.dataGridView1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dataGridView1.Location = new System.Drawing.Point(0, 0);
             this.dataGridView1.MultiSelect = false;
@@ -106,8 +106,8 @@
             this.button2.Location = new System.Drawing.Point(28, 429);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(133, 48);
-            this.button2.TabIndex = 8;
-            this.button2.Text = "Almacenar Cambios";
+            this.button2.TabIndex = 2;
+            this.button2.Text = "Save Changes";
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.Button_SaveChanges);
             // 
@@ -134,6 +134,59 @@
             this.splitContainer1.SplitterDistance = 192;
             this.splitContainer1.TabIndex = 9;
             // 
+            // groupBox2
+            // 
+            this.groupBox2.Controls.Add(this.button3);
+            this.groupBox2.Controls.Add(this.buttonModificar);
+            this.groupBox2.Location = new System.Drawing.Point(12, 248);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Size = new System.Drawing.Size(162, 157);
+            this.groupBox2.TabIndex = 1;
+            this.groupBox2.TabStop = false;
+            this.groupBox2.Text = "Modified Transaction";
+            // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.buttonNewAdjust);
+            this.groupBox1.Controls.Add(this.buttonNewSpending);
+            this.groupBox1.Controls.Add(this.buttonNewIncoming);
+            this.groupBox1.Location = new System.Drawing.Point(12, 46);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(162, 196);
+            this.groupBox1.TabIndex = 0;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "New Transaction";
+            // 
+            // buttonNewAdjust
+            // 
+            this.buttonNewAdjust.Location = new System.Drawing.Point(16, 140);
+            this.buttonNewAdjust.Name = "buttonNewAdjust";
+            this.buttonNewAdjust.Size = new System.Drawing.Size(133, 40);
+            this.buttonNewAdjust.TabIndex = 2;
+            this.buttonNewAdjust.Text = "New Adjust";
+            this.buttonNewAdjust.UseVisualStyleBackColor = true;
+            this.buttonNewAdjust.Click += new System.EventHandler(this.buttonNewAdjust_Click);
+            // 
+            // buttonNewSpending
+            // 
+            this.buttonNewSpending.Location = new System.Drawing.Point(16, 84);
+            this.buttonNewSpending.Name = "buttonNewSpending";
+            this.buttonNewSpending.Size = new System.Drawing.Size(133, 40);
+            this.buttonNewSpending.TabIndex = 1;
+            this.buttonNewSpending.Text = "New Spending";
+            this.buttonNewSpending.UseVisualStyleBackColor = true;
+            this.buttonNewSpending.Click += new System.EventHandler(this.buttonNewSpending_Click);
+            // 
+            // buttonNewIncoming
+            // 
+            this.buttonNewIncoming.Location = new System.Drawing.Point(16, 32);
+            this.buttonNewIncoming.Name = "buttonNewIncoming";
+            this.buttonNewIncoming.Size = new System.Drawing.Size(133, 40);
+            this.buttonNewIncoming.TabIndex = 0;
+            this.buttonNewIncoming.Text = "New Incoming";
+            this.buttonNewIncoming.UseVisualStyleBackColor = true;
+            this.buttonNewIncoming.Click += new System.EventHandler(this.buttonNewIncoming_Click);
+            // 
             // textBox1
             // 
             this.textBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -145,59 +198,6 @@
             this.textBox1.TabIndex = 9;
             this.textBox1.Text = "Control Panel";
             this.textBox1.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            // 
-            // groupBox1
-            // 
-            this.groupBox1.Controls.Add(this.buttonNewAdjust);
-            this.groupBox1.Controls.Add(this.buttonNewSpending);
-            this.groupBox1.Controls.Add(this.buttonNewIncoming);
-            this.groupBox1.Location = new System.Drawing.Point(12, 46);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(162, 196);
-            this.groupBox1.TabIndex = 13;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "New Transaction";
-            // 
-            // buttonNewAdjust
-            // 
-            this.buttonNewAdjust.Location = new System.Drawing.Point(16, 140);
-            this.buttonNewAdjust.Name = "buttonNewAdjust";
-            this.buttonNewAdjust.Size = new System.Drawing.Size(133, 40);
-            this.buttonNewAdjust.TabIndex = 15;
-            this.buttonNewAdjust.Text = "New Adjust";
-            this.buttonNewAdjust.UseVisualStyleBackColor = true;
-            this.buttonNewAdjust.Click += new System.EventHandler(this.buttonNewAdjust_Click);
-            // 
-            // buttonNewSpending
-            // 
-            this.buttonNewSpending.Location = new System.Drawing.Point(16, 84);
-            this.buttonNewSpending.Name = "buttonNewSpending";
-            this.buttonNewSpending.Size = new System.Drawing.Size(133, 40);
-            this.buttonNewSpending.TabIndex = 14;
-            this.buttonNewSpending.Text = "New Spending";
-            this.buttonNewSpending.UseVisualStyleBackColor = true;
-            this.buttonNewSpending.Click += new System.EventHandler(this.buttonNewSpending_Click);
-            // 
-            // buttonNewIncoming
-            // 
-            this.buttonNewIncoming.Location = new System.Drawing.Point(16, 32);
-            this.buttonNewIncoming.Name = "buttonNewIncoming";
-            this.buttonNewIncoming.Size = new System.Drawing.Size(133, 40);
-            this.buttonNewIncoming.TabIndex = 13;
-            this.buttonNewIncoming.Text = "New Incoming";
-            this.buttonNewIncoming.UseVisualStyleBackColor = true;
-            this.buttonNewIncoming.Click += new System.EventHandler(this.buttonNewIncoming_Click);
-            // 
-            // groupBox2
-            // 
-            this.groupBox2.Controls.Add(this.button3);
-            this.groupBox2.Controls.Add(this.buttonModificar);
-            this.groupBox2.Location = new System.Drawing.Point(12, 248);
-            this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(162, 157);
-            this.groupBox2.TabIndex = 14;
-            this.groupBox2.TabStop = false;
-            this.groupBox2.Text = "Modified Transaction";
             // 
             // TransactionInfo
             // 
@@ -214,8 +214,8 @@
             this.splitContainer1.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
             this.splitContainer1.ResumeLayout(false);
-            this.groupBox1.ResumeLayout(false);
             this.groupBox2.ResumeLayout(false);
+            this.groupBox1.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }

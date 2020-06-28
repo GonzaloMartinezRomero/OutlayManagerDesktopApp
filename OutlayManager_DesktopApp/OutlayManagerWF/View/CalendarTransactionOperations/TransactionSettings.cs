@@ -1,4 +1,5 @@
-﻿using OutlayManagerWF.Model;
+﻿using OutlayManagerWF.Manager;
+using OutlayManagerWF.Model;
 using OutlayManagerWF.Model.View;
 using OutlayManagerWF.Utilities;
 using OutlayManagerWF.WebServices;
@@ -27,6 +28,21 @@ namespace OutlayManagerWF
 
             this.textBoxSpendType.ReadOnly = true;
             this.dateTimeSpend.Enabled = false;
+
+            //CONFIGURE DROP DOWN CODES
+            ConfigureDropDownValuesCodes();
+        }
+
+        private void ConfigureDropDownValuesCodes()
+        {
+           List<string> codesTransactionsRegistered = new TransactionManager().TransactionCodes();
+                       
+            transactionCodeSelector.DataSource = codesTransactionsRegistered;         
+            transactionCodeSelector.AutoCompleteSource = AutoCompleteSource.ListItems;
+            transactionCodeSelector.AutoCompleteMode = AutoCompleteMode.Suggest;
+
+            transactionCodeSelector.DropDownStyle = ComboBoxStyle.DropDown;
+            transactionCodeSelector.SelectedItem = null;                      
         }
 
         public TransactionSettings(DateTime date, OutlayTypesEnum typeOutlay) : this()
@@ -41,7 +57,7 @@ namespace OutlayManagerWF
             this.textBoxSpendType.Text = transactionView.Type;
             this.text_amount.Text = Normalizer.NormalizeAmount(transactionView.Amount);
             this.dateTimeSpend.Value = transactionView.Date;
-            this.text_Codigo.Text = transactionView.Code;
+            this.transactionCodeSelector.SelectedText = transactionView.Code;
             this.text_description.Text = transactionView.Description;
             this.transactionID = transactionView.ID;
 
@@ -95,12 +111,19 @@ namespace OutlayManagerWF
             transaction.Date = this.dateTimeSpend.Value;
 
             transaction.DetailTransaction.Description = this.text_description.Text;
-            transaction.DetailTransaction.Code = this.text_Codigo.Text;
+
+            string transactionCodeInput = this.transactionCodeSelector.Text;
+
+            if (String.IsNullOrWhiteSpace(transactionCodeInput))
+                throw new Exception("Transaction code cant be empty");
+
+            transaction.DetailTransaction.Code = transactionCodeInput;
 
             transaction.Internal_ID = this.internalTransactionID;
             transaction.Source = this.generationSource;
 
             return (isAllOk) ? transaction : null;
         }
+
     }
 }

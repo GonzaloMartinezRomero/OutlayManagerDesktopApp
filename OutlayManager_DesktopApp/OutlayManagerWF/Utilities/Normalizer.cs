@@ -36,5 +36,12 @@ namespace OutlayManagerWF.Utilities
             return amountNormalized;
         }
 
+        public static string SpainFormatAmount(double amount)
+        {
+            double roundAmount = Math.Round(amount,2);
+
+            return roundAmount.ToString("N", CultureInfo.CreateSpecificCulture("es-ES")) + " €";
+        }
+
     }
 }
