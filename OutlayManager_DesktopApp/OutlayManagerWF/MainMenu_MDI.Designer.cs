@@ -88,6 +88,10 @@
             this.splitContainer1.Panel1.Controls.Add(this.dropDownYear);
             this.splitContainer1.Panel1.Controls.Add(this.textBox5);
             this.splitContainer1.Panel1.Controls.Add(this.textBox8);
+            // 
+            // splitContainer1.Panel2
+            // 
+            
             this.splitContainer1.Size = new System.Drawing.Size(1407, 723);
             this.splitContainer1.SplitterDistance = 247;
             this.splitContainer1.TabIndex = 14;
@@ -289,7 +293,7 @@
             this.button2.TabIndex = 29;
             this.button2.Text = "Show Resume";
             this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.button2_Click);
+            this.button2.Click += new System.EventHandler(this.showResume_Click);
             // 
             // button1
             // 
@@ -299,7 +303,7 @@
             this.button1.TabIndex = 19;
             this.button1.Text = "Load Calendar";
             this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.CalendarTransactions_Click);
+            this.button1.Click += new System.EventHandler(this.CalendarTransactionsLoad_Click);
             // 
             // textBox2
             // 

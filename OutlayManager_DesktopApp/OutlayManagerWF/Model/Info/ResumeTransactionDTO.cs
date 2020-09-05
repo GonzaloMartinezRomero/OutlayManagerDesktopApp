@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace OutlayManagerWF.Model.Info
 {
-    public class ResumeCodeTransaction
+    public class ResumeTransactionDTO
     {       
         public string Code { get; set; }
         public double Amount { get; set; }

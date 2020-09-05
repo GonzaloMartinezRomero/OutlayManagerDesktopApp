@@ -18,9 +18,6 @@ namespace OutlayManagerWF
         private readonly Dictionary<string, int> monthNumberCorrespondence;
         private readonly HashSet<DateTime> formsLoaded;
 
-        private int monthSelected = 0;
-        private int yearSelected = 0;
-
         public MainMenu_MDI()
         {
             InitializeComponent();
@@ -51,14 +48,15 @@ namespace OutlayManagerWF
             this.autoBackupCheck.Checked = true;
 
             //Autoload default month selected
-            this.CalendarTransactions_Click(this, null);
+            this.CalendarTransactionsLoad_Click(this, null);
         }
 
-        private void CalendarTransactions_Click(object sender, EventArgs e)
+        private void CalendarTransactionsLoad_Click(object sender, EventArgs e)
         {
             try
             {
-                UpdateSelectedDate();
+                int monthSelected = monthNumberCorrespondence[this.dropDownMonth.SelectedItem.ToString()];
+                int yearSelected = Int32.Parse(this.dropDownYear.SelectedItem.ToString());
 
                 DateTime dateSelected = new DateTime(yearSelected, monthSelected, 01);
 
@@ -75,6 +73,7 @@ namespace OutlayManagerWF
                     formsLoaded.Add(dateSelected);
                     calendarTransaction.FormClosed += UnloadFormCalendar;
                     calendarTransaction.OnChangesInCalendar += LoadResumeFromSelectedFormMDI;
+                    calendarTransaction.Click += CalendarTransactionWindow_Click;
 
                     calendarTransaction.BringToFront();
                     calendarTransaction.Show();
@@ -88,10 +87,14 @@ namespace OutlayManagerWF
             }            
         }
 
-        private void UpdateSelectedDate()
+        private void CalendarTransactionWindow_Click(object sender, EventArgs e)
         {
-            monthSelected = monthNumberCorrespondence[this.dropDownMonth.SelectedItem.ToString()];
-            yearSelected = Int32.Parse(this.dropDownYear.SelectedItem.ToString());
+            if(sender is CalendarTransaction calendarTransaction)
+            {
+                LoadResumeFromSelectedFormMDI(calendarTransaction, null);
+                calendarTransaction.BringToFront();
+                calendarTransaction.Show();
+            }
         }
 
         private void UnloadFormCalendar(object sender, FormClosedEventArgs e)
@@ -123,7 +126,7 @@ namespace OutlayManagerWF
                 this.textBoxSaving.Text = Normalizer.SpainFormatAmount(savingAmount);
                 this.textBoxSaving.BackColor = (savingAmount > 0) ? Color.GreenYellow : Color.Red;
 
-                double totalAmount = transactionManager.GetTotalAmount() + resume.Adjust;
+                double totalAmount = transactionManager.GetTotalAmount();
                 this.textBoxTotalAmount.Text = Normalizer.SpainFormatAmount(totalAmount);
             }
         }
@@ -144,37 +147,28 @@ namespace OutlayManagerWF
             }
         }
 
-        private void button2_Click(object sender, EventArgs e)
+        private void showResume_Click(object sender, EventArgs e)
         {
-            UpdateSelectedDate();
+            if(Int32.TryParse(this.textBoxYear.Text,out int yearSelected) && Int32.TryParse(this.textBoxMonth.Text, out int monthSelected))
+            {
+                ResumeForm resumeForm = new ResumeForm(yearSelected, monthSelected);
+                resumeForm.MdiParent = this;
 
-            ResumeForm resumeForm = new ResumeForm(this.yearSelected,this.monthSelected);
-            resumeForm.MdiParent = this;
+                this.splitContainer1.Panel2.Controls.Add(resumeForm);
+                this.splitContainer1.Dock = DockStyle.Fill;
 
-            this.splitContainer1.Panel2.Controls.Add(resumeForm);
-            this.splitContainer1.Dock = DockStyle.Fill;
-
-            resumeForm.BringToFront();
-            resumeForm.Show();
+                resumeForm.BringToFront();
+                resumeForm.Show();
+            }
+            else
+            {
+                new DialogManager().ShowDialog(DialogManager.DialogLevel.Information, "Date has not been selected", this);
+            }
         }
 
         private void buttonBackupFolder_Click(object sender, EventArgs e)
         {
             new BackupManager().OpenBackupDirectory();
         }
-
-        /*    VERY DANGEROUS CODE    */
-        //private void button3_Click(object sender, EventArgs e)
-        //{
-        //    using (var fbd = new FolderBrowserDialog())
-        //    {
-        //        var result = fbd.ShowDialog();
-
-        //        string path = fbd.SelectedPath;
-
-        //        TransactionManager tm = new TransactionManager();
-        //        tm.LoadTransactionToBDFromCSV(path);
-        //    }   
-        //}
     }
 }

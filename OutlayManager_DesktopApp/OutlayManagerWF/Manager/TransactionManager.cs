@@ -154,9 +154,9 @@ namespace OutlayManagerWF.Manager
             return resumeMonth;
         }
 
-        public List<ResumeCodeTransaction> GetResumeByCode(int year, int month)
+        public List<ResumeTransactionDTO> GetAllMonthsTransactions(int year, int month)
         {
-            ResumeCodeTransaction resume = new ResumeCodeTransaction();
+            ResumeTransactionDTO resume = new ResumeTransactionDTO();
 
             try
             {
@@ -164,17 +164,16 @@ namespace OutlayManagerWF.Manager
 
                 List<TransactionDTO> transactions = managerAPI.GetTransaction(year, month);
 
-                List<ResumeCodeTransaction> listResume = transactions.GroupBy(x => x.DetailTransaction.Code + x.DetailTransaction.Type)
-                                                                     .Select(value =>
-                                                                             {
-                                                                                 return new ResumeCodeTransaction()
-                                                                                 {
-                                                                                     Code = value.FirstOrDefault()?.DetailTransaction.Code,
-                                                                                     Type = value.FirstOrDefault()?.DetailTransaction.Type,
-                                                                                     Amount = value.Sum(x => x.Amount),
-                                                                                     Date = new DateTime(year, month, 01),
-                                                                                 };
-                                                                             })
+                List<ResumeTransactionDTO> listResume = transactions.Select(value =>
+                                                                    {
+                                                                        return new ResumeTransactionDTO()
+                                                                        {
+                                                                            Code = value.DetailTransaction.Code,
+                                                                            Type = value.DetailTransaction.Type,
+                                                                            Amount = value.Amount,
+                                                                            Date = value.Date,
+                                                                        };
+                                                                    })
                                                                      .ToList();
                 return listResume;
 

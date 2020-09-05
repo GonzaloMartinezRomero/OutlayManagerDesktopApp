@@ -28,57 +28,44 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.dataGridCodeExpenses = new System.Windows.Forms.DataGridView();
-            this.dataGridComparisionDate = new System.Windows.Forms.DataGridView();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridCodeExpenses)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridComparisionDate)).BeginInit();
+            this.advancedDataGridView1 = new Zuby.ADGV.AdvancedDataGridView();
+            ((System.ComponentModel.ISupportInitialize)(this.advancedDataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
-            // dataGridCodeExpenses
+            // advancedDataGridView1
             // 
-            this.dataGridCodeExpenses.AllowUserToAddRows = false;
-            this.dataGridCodeExpenses.AllowUserToDeleteRows = false;
-            this.dataGridCodeExpenses.AllowUserToOrderColumns = true;
-            this.dataGridCodeExpenses.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridCodeExpenses.Location = new System.Drawing.Point(12, 12);
-            this.dataGridCodeExpenses.Name = "dataGridCodeExpenses";
-            this.dataGridCodeExpenses.ReadOnly = true;
-            this.dataGridCodeExpenses.RowHeadersWidth = 51;
-            this.dataGridCodeExpenses.RowTemplate.Height = 24;
-            this.dataGridCodeExpenses.Size = new System.Drawing.Size(625, 412);
-            this.dataGridCodeExpenses.TabIndex = 4;
-            // 
-            // dataGridComparisionDate
-            // 
-            this.dataGridComparisionDate.AllowUserToAddRows = false;
-            this.dataGridComparisionDate.AllowUserToDeleteRows = false;
-            this.dataGridComparisionDate.AllowUserToOrderColumns = true;
-            this.dataGridComparisionDate.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridComparisionDate.Location = new System.Drawing.Point(673, 12);
-            this.dataGridComparisionDate.Name = "dataGridComparisionDate";
-            this.dataGridComparisionDate.ReadOnly = true;
-            this.dataGridComparisionDate.RowHeadersWidth = 51;
-            this.dataGridComparisionDate.RowTemplate.Height = 24;
-            this.dataGridComparisionDate.Size = new System.Drawing.Size(597, 412);
-            this.dataGridComparisionDate.TabIndex = 5;
+            this.advancedDataGridView1.AllowUserToAddRows = false;
+            this.advancedDataGridView1.AllowUserToDeleteRows = false;
+            this.advancedDataGridView1.AllowUserToOrderColumns = true;
+            this.advancedDataGridView1.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.advancedDataGridView1.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.DisplayedCells;
+            this.advancedDataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.advancedDataGridView1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.advancedDataGridView1.FilterAndSortEnabled = true;
+            this.advancedDataGridView1.Location = new System.Drawing.Point(0, 0);
+            this.advancedDataGridView1.Name = "advancedDataGridView1";
+            this.advancedDataGridView1.ReadOnly = true;
+            this.advancedDataGridView1.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.advancedDataGridView1.RowHeadersWidth = 51;
+            this.advancedDataGridView1.RowTemplate.Height = 24;
+            this.advancedDataGridView1.Size = new System.Drawing.Size(676, 543);
+            this.advancedDataGridView1.TabIndex = 0;
             // 
             // ResumeForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1396, 751);
-            this.Controls.Add(this.dataGridComparisionDate);
-            this.Controls.Add(this.dataGridCodeExpenses);
+            this.ClientSize = new System.Drawing.Size(676, 543);
+            this.Controls.Add(this.advancedDataGridView1);
             this.Name = "ResumeForm";
             this.Text = "ResumeForm";
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridCodeExpenses)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridComparisionDate)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.advancedDataGridView1)).EndInit();
             this.ResumeLayout(false);
 
         }
 
         #endregion
-        private System.Windows.Forms.DataGridView dataGridCodeExpenses;
-        private System.Windows.Forms.DataGridView dataGridComparisionDate;
+
+        private Zuby.ADGV.AdvancedDataGridView advancedDataGridView1;
     }
 }

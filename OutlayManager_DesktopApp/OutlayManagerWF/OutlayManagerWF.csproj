@@ -64,6 +64,12 @@
     <SignManifests>true</SignManifests>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="AdvancedDataGridView, Version=1.1.24722.8, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\DG.AdvancedDataGridView.1.1.24722.8\lib\net40\AdvancedDataGridView.dll</HintPath>
+    </Reference>
+    <Reference Include="FastMember, Version=1.5.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\FastMember.1.5.0\lib\net461\FastMember.dll</HintPath>
+    </Reference>
     <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\..\packages\Newtonsoft.Json.12.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
@@ -91,7 +97,7 @@
     <Compile Include="Manager\BackupManager.cs" />
     <Compile Include="Manager\DialogManager.cs" />
     <Compile Include="Manager\TransactionManager.cs" />
-    <Compile Include="Model\Info\ResumeCodeTransaction.cs" />
+    <Compile Include="Model\Info\ResumeTransactionDTO.cs" />
     <Compile Include="Model\Info\ResumeMonth.cs" />
     <Compile Include="Utilities\Normalizer.cs" />
     <Compile Include="View\CalendarTransactionOperations\CalendarTransaction.cs">
