@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Linq;
 using System.Windows.Forms;
+using Zuby.ADGV;
 
 namespace OutlayManagerWF.View.ResumeTransactions
 {
@@ -21,6 +22,26 @@ namespace OutlayManagerWF.View.ResumeTransactions
         public ResumeForm(int year, int month) : this()
         {
             FillMonthsTransactions(year,month);
+            this.advancedDataGridView1.FilterStringChanged += AdvancedDataGridView1_FilterStringChanged;
+        }
+
+        private void AdvancedDataGridView1_FilterStringChanged(object sender, Zuby.ADGV.AdvancedDataGridView.FilterEventArgs e)
+        {
+            double totalAmountFiteredColumns = 0.0d;
+
+            if (sender is AdvancedDataGridView dataGridView)
+            {
+                 BindingSource bindingSource = dataGridView.DataSource as BindingSource;
+                 DataView dataView = bindingSource.List as DataView;
+                 dataView.RowFilter = e.FilterString;
+
+                 foreach(DataRowView dataRowFiltered in dataView)
+                 {
+                     totalAmountFiteredColumns += Utilities.Normalizer.NormalizeAmount(dataRowFiltered[nameof(ResumeTransactionDTO.Amount)]);
+                 }
+            }
+
+            this.textBoxTotalAmount.Text = Utilities.Normalizer.SpainFormatAmount(totalAmountFiteredColumns);
         }
 
         private void FillMonthsTransactions(int year, int month)
@@ -42,72 +63,15 @@ namespace OutlayManagerWF.View.ResumeTransactions
                 };
 
                 this.advancedDataGridView1.DataSource = bindingSource;
+
+                double totalTransactionsAmount = resumeTransactions.Select(x => x.Amount).Sum();
+
+                this.textBoxTotalAmount.Text = Utilities.Normalizer.SpainFormatAmount(totalTransactionsAmount);
             }
             catch (Exception e)
             {
                 new DialogManager().ShowDialog(DialogManager.DialogLevel.Exception, e.Message, this);
             }
         }
-
-        //private void FillComparationExpenses(int year, int month)
-        //{
-        //    try
-        //    {
-        //        List<ResumeMonth> resumeMonthList = new List<ResumeMonth>();
-
-        //        DateTime dateRequested = new DateTime(year, month, 1);
-
-        //        TransactionManager trManager = new TransactionManager();
-        //        resumeMonthList.Add(trManager.GetResume(dateRequested.Year, dateRequested.Month));
-
-        //        DateTime pastMonth = dateRequested.AddMonths(-1);
-        //        resumeMonthList.Add(trManager.GetResume(pastMonth.Year, pastMonth.Month));
-
-        //        DateTime pastYear = dateRequested.AddYears(-1);
-        //        resumeMonthList.Add(trManager.GetResume(pastYear.Year, pastYear.Month));
-
-        //        BindingSource bindingSource = new BindingSource
-        //        {
-        //            DataSource = resumeMonthList.Select(x =>
-        //            {
-        //                return new
-        //                {
-        //                    x.Date,
-        //                    x.Spenses,
-        //                    x.Incoming,
-        //                    Saving = Math.Round(x.Incoming - x.Spenses,2)
-        //                };
-        //            })
-        //        };
-
-        //        this.dataGridComparisionDate.DataSource = bindingSource;
-
-        //    }catch(Exception e)
-        //    {
-        //        new DialogManager().ShowDialog(DialogManager.DialogLevel.Exception, e.Message, this);
-        //    }
-
-        //}
-
-        //private void FillResumeMonthData(int year, int month)
-        //{
-        //    try
-        //    {
-        //        List<ResumeCodeTransaction> resumeTransactions = new TransactionManager().GetResumeByCode(year, month)
-        //                                                                                 .Where(x => x.Type.ToUpper().Trim() != OutlayDataHelper.OutlayTypesEnum.INCOMING.ToString())
-        //                                                                                 .OrderByDescending(x => x.Amount)
-        //                                                                                 .ToList();
-
-        //        BindingSource bindingSource = new BindingSource();
-        //        bindingSource.DataSource = resumeTransactions;
-
-        //        this.dataGridCodeExpenses.DataSource = bindingSource;
-        //    }
-        //    catch (Exception e)
-        //    {
-        //        new DialogManager().ShowDialog(DialogManager.DialogLevel.Exception, e.Message, this);
-        //    }
-           
-        //}
     }
 }
