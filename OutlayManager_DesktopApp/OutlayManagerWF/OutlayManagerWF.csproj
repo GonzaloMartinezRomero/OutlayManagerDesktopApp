@@ -144,11 +144,17 @@
     </Compile>
     <Compile Include="Utilities\CastObject.cs" />
     <Compile Include="Utilities\TextBuilder.cs" />
-    <Compile Include="View\ResumeTransactions\ResumeForm.cs">
+    <Compile Include="View\ResumeTransactions\ResumeSavingsForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="View\ResumeTransactions\ResumeForm.Designer.cs">
-      <DependentUpon>ResumeForm.cs</DependentUpon>
+    <Compile Include="View\ResumeTransactions\ResumeSavingsForm.Designer.cs">
+      <DependentUpon>ResumeSavingsForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\ResumeTransactions\ResumeMonthTransactionsForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\ResumeTransactions\ResumeMonthTransactionsForm.Designer.cs">
+      <DependentUpon>ResumeMonthTransactionsForm.cs</DependentUpon>
     </Compile>
     <Compile Include="WebServices\OutlayAPIManager.cs" />
     <Compile Include="WebServices\OutlayDataHelper.cs" />
@@ -180,8 +186,11 @@
     <EmbeddedResource Include="View\CalendarTransactionOperations\TransactionSettings.resx">
       <DependentUpon>TransactionSettings.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="View\ResumeTransactions\ResumeForm.resx">
-      <DependentUpon>ResumeForm.cs</DependentUpon>
+    <EmbeddedResource Include="View\ResumeTransactions\ResumeSavingsForm.resx">
+      <DependentUpon>ResumeSavingsForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\ResumeTransactions\ResumeMonthTransactionsForm.resx">
+      <DependentUpon>ResumeMonthTransactionsForm.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="packages.config" />
     <None Include="Properties\DataSources\OutlayManagerWF.Model.DetailTransacionDTO.datasource" />

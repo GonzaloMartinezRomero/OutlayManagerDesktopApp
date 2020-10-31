@@ -1,6 +1,6 @@
 ﻿namespace OutlayManagerWF.View.ResumeTransactions
 {
-    partial class ResumeForm
+    partial class ResumeMonthTransactionsForm
     {
         /// <summary>
         /// Required designer variable.

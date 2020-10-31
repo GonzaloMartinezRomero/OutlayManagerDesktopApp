@@ -56,6 +56,7 @@
             this.textBox5 = new System.Windows.Forms.TextBox();
             this.textBox8 = new System.Windows.Forms.TextBox();
             this.bindingSource1 = new System.Windows.Forms.BindingSource(this.components);
+            this.button3 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.SuspendLayout();
@@ -73,6 +74,7 @@
             // 
             // splitContainer1.Panel1
             // 
+            this.splitContainer1.Panel1.Controls.Add(this.button3);
             this.splitContainer1.Panel1.Controls.Add(this.buttonBackupFolder);
             this.splitContainer1.Panel1.Controls.Add(this.textBox3);
             this.splitContainer1.Panel1.Controls.Add(this.groupBox2);
@@ -88,17 +90,13 @@
             this.splitContainer1.Panel1.Controls.Add(this.dropDownYear);
             this.splitContainer1.Panel1.Controls.Add(this.textBox5);
             this.splitContainer1.Panel1.Controls.Add(this.textBox8);
-            // 
-            // splitContainer1.Panel2
-            // 
-            
             this.splitContainer1.Size = new System.Drawing.Size(1407, 723);
             this.splitContainer1.SplitterDistance = 247;
             this.splitContainer1.TabIndex = 14;
             // 
             // buttonBackupFolder
             // 
-            this.buttonBackupFolder.Location = new System.Drawing.Point(28, 639);
+            this.buttonBackupFolder.Location = new System.Drawing.Point(28, 649);
             this.buttonBackupFolder.Name = "buttonBackupFolder";
             this.buttonBackupFolder.Size = new System.Drawing.Size(178, 29);
             this.buttonBackupFolder.TabIndex = 36;
@@ -110,7 +108,7 @@
             // 
             this.textBox3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.textBox3.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox3.Location = new System.Drawing.Point(16, 594);
+            this.textBox3.Location = new System.Drawing.Point(16, 604);
             this.textBox3.Multiline = true;
             this.textBox3.Name = "textBox3";
             this.textBox3.ReadOnly = true;
@@ -128,7 +126,7 @@
             this.groupBox2.Controls.Add(this.textBoxSaving);
             this.groupBox2.Controls.Add(this.textBoxIncoming);
             this.groupBox2.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupBox2.Location = new System.Drawing.Point(16, 382);
+            this.groupBox2.Location = new System.Drawing.Point(16, 407);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(222, 152);
             this.groupBox2.TabIndex = 34;
@@ -205,7 +203,7 @@
             this.Date.Controls.Add(this.textBox10);
             this.Date.Controls.Add(this.textBoxYear);
             this.Date.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Date.Location = new System.Drawing.Point(16, 266);
+            this.Date.Location = new System.Drawing.Point(16, 291);
             this.Date.Name = "Date";
             this.Date.Size = new System.Drawing.Size(222, 110);
             this.Date.TabIndex = 33;
@@ -257,7 +255,7 @@
             // textBoxTotalAmount
             // 
             this.textBoxTotalAmount.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBoxTotalAmount.Location = new System.Drawing.Point(108, 542);
+            this.textBoxTotalAmount.Location = new System.Drawing.Point(108, 567);
             this.textBoxTotalAmount.Name = "textBoxTotalAmount";
             this.textBoxTotalAmount.ReadOnly = true;
             this.textBoxTotalAmount.Size = new System.Drawing.Size(130, 24);
@@ -267,7 +265,7 @@
             // textBoxTotal
             // 
             this.textBoxTotal.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBoxTotal.Location = new System.Drawing.Point(16, 542);
+            this.textBoxTotal.Location = new System.Drawing.Point(16, 567);
             this.textBoxTotal.Name = "textBoxTotal";
             this.textBoxTotal.ReadOnly = true;
             this.textBoxTotal.Size = new System.Drawing.Size(86, 24);
@@ -278,7 +276,7 @@
             // autoBackupCheck
             // 
             this.autoBackupCheck.AutoSize = true;
-            this.autoBackupCheck.Location = new System.Drawing.Point(31, 684);
+            this.autoBackupCheck.Location = new System.Drawing.Point(31, 692);
             this.autoBackupCheck.Name = "autoBackupCheck";
             this.autoBackupCheck.Size = new System.Drawing.Size(139, 21);
             this.autoBackupCheck.TabIndex = 30;
@@ -287,22 +285,23 @@
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(28, 171);
+            this.button2.Location = new System.Drawing.Point(28, 167);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(178, 29);
             this.button2.TabIndex = 29;
-            this.button2.Text = "Show Resume";
+            this.button2.Text = "Transactions Resume";
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.showResume_Click);
             // 
             // button1
             // 
+            this.button1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
             this.button1.Location = new System.Drawing.Point(28, 132);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(178, 29);
             this.button1.TabIndex = 19;
             this.button1.Text = "Load Calendar";
-            this.button1.UseVisualStyleBackColor = true;
+            this.button1.UseVisualStyleBackColor = false;
             this.button1.Click += new System.EventHandler(this.CalendarTransactionsLoad_Click);
             // 
             // textBox2
@@ -345,7 +344,7 @@
             // 
             this.textBox5.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.textBox5.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox5.Location = new System.Drawing.Point(16, 218);
+            this.textBox5.Location = new System.Drawing.Point(16, 247);
             this.textBox5.Multiline = true;
             this.textBox5.Name = "textBox5";
             this.textBox5.ReadOnly = true;
@@ -366,6 +365,16 @@
             this.textBox8.TabIndex = 11;
             this.textBox8.Text = "TRANSACTIONS";
             this.textBox8.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // button3
+            // 
+            this.button3.Location = new System.Drawing.Point(28, 202);
+            this.button3.Name = "button3";
+            this.button3.Size = new System.Drawing.Size(178, 29);
+            this.button3.TabIndex = 37;
+            this.button3.Text = "Months Savings ";
+            this.button3.UseVisualStyleBackColor = true;
+            this.button3.Click += new System.EventHandler(this.button3_Click);
             // 
             // MainMenu_MDI
             // 
@@ -418,5 +427,6 @@
         private System.Windows.Forms.TextBox textBox4;
         private System.Windows.Forms.Button buttonBackupFolder;
         private System.Windows.Forms.TextBox textBox3;
+        private System.Windows.Forms.Button button3;
     }
 }

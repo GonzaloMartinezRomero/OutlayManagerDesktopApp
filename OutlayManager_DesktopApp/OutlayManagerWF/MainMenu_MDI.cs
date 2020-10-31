@@ -151,7 +151,7 @@ namespace OutlayManagerWF
         {
             if(Int32.TryParse(this.textBoxYear.Text,out int yearSelected) && Int32.TryParse(this.textBoxMonth.Text, out int monthSelected))
             {
-                ResumeForm resumeForm = new ResumeForm(yearSelected, monthSelected);
+                ResumeMonthTransactionsForm resumeForm = new ResumeMonthTransactionsForm(yearSelected, monthSelected);
                 resumeForm.MdiParent = this;
 
                 this.splitContainer1.Panel2.Controls.Add(resumeForm);
@@ -169,6 +169,14 @@ namespace OutlayManagerWF
         private void buttonBackupFolder_Click(object sender, EventArgs e)
         {
             new BackupManager().OpenBackupDirectory();
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            using (ResumeSavingsForm resumeSavingsForm = new ResumeSavingsForm())
+            {
+                resumeSavingsForm.ShowDialog(this);
+            }
         }
     }
 }

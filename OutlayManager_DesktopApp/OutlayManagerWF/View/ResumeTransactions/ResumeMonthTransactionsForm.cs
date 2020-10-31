@@ -1,8 +1,6 @@
 ﻿using FastMember;
 using OutlayManagerWF.Manager;
-using OutlayManagerWF.Model;
 using OutlayManagerWF.Model.Info;
-using OutlayManagerWF.WebServices;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -12,14 +10,14 @@ using Zuby.ADGV;
 
 namespace OutlayManagerWF.View.ResumeTransactions
 {
-    public partial class ResumeForm : Form
+    public partial class ResumeMonthTransactionsForm : Form
     {
-        private ResumeForm()
+        private ResumeMonthTransactionsForm()
         {
             InitializeComponent();
         }
 
-        public ResumeForm(int year, int month) : this()
+        public ResumeMonthTransactionsForm(int year, int month) : this()
         {
             FillMonthsTransactions(year,month);
             this.advancedDataGridView1.FilterStringChanged += AdvancedDataGridView1_FilterStringChanged;
