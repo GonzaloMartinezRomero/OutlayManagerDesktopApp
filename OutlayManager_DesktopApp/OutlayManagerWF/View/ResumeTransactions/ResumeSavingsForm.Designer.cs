@@ -28,16 +28,20 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea2 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend2 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series3 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.Series series4 = new System.Windows.Forms.DataVisualization.Charting.Series();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
-            this.savingChart = new System.Windows.Forms.DataVisualization.Charting.Chart();
-            this.dateTimeFrom = new System.Windows.Forms.DateTimePicker();
-            this.dateTimeTo = new System.Windows.Forms.DateTimePicker();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.textBox2 = new System.Windows.Forms.TextBox();
+            this.buttonClear = new System.Windows.Forms.Button();
             this.buttonCalculateSaving = new System.Windows.Forms.Button();
+            this.textBox2 = new System.Windows.Forms.TextBox();
+            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.dateTimeTo = new System.Windows.Forms.DateTimePicker();
+            this.dateTimeFrom = new System.Windows.Forms.DateTimePicker();
+            this.savingChart = new System.Windows.Forms.DataVisualization.Charting.Chart();
+            this.chartTypeSelector = new System.Windows.Forms.ComboBox();
+            this.textBox3 = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -54,6 +58,9 @@
             // 
             // splitContainer1.Panel1
             // 
+            this.splitContainer1.Panel1.Controls.Add(this.textBox3);
+            this.splitContainer1.Panel1.Controls.Add(this.chartTypeSelector);
+            this.splitContainer1.Panel1.Controls.Add(this.buttonClear);
             this.splitContainer1.Panel1.Controls.Add(this.buttonCalculateSaving);
             this.splitContainer1.Panel1.Controls.Add(this.textBox2);
             this.splitContainer1.Panel1.Controls.Add(this.textBox1);
@@ -63,57 +70,29 @@
             // splitContainer1.Panel2
             // 
             this.splitContainer1.Panel2.Controls.Add(this.savingChart);
-            this.splitContainer1.Size = new System.Drawing.Size(1255, 520);
+            this.splitContainer1.Size = new System.Drawing.Size(1372, 520);
             this.splitContainer1.SplitterDistance = 69;
             this.splitContainer1.TabIndex = 0;
             // 
-            // savingChart
+            // buttonClear
             // 
-            chartArea1.Name = "ChartArea1";
-            this.savingChart.ChartAreas.Add(chartArea1);
-            this.savingChart.Dock = System.Windows.Forms.DockStyle.Fill;
-            legend1.Name = "Legend1";
-            this.savingChart.Legends.Add(legend1);
-            this.savingChart.Location = new System.Drawing.Point(0, 0);
-            this.savingChart.Name = "savingChart";
-            this.savingChart.Palette = System.Windows.Forms.DataVisualization.Charting.ChartColorPalette.Fire;
-            series1.ChartArea = "ChartArea1";
-            series1.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.SplineArea;
-            series1.IsValueShownAsLabel = true;
-            series1.IsXValueIndexed = true;
-            series1.Legend = "Legend1";
-            series1.Name = "Series1";
-            series1.YValuesPerPoint = 2;
-            this.savingChart.Series.Add(series1);
-            this.savingChart.Size = new System.Drawing.Size(1255, 447);
-            this.savingChart.TabIndex = 0;
-            this.savingChart.Text = "chart1";
+            this.buttonClear.Location = new System.Drawing.Point(694, 8);
+            this.buttonClear.Name = "buttonClear";
+            this.buttonClear.Size = new System.Drawing.Size(106, 50);
+            this.buttonClear.TabIndex = 5;
+            this.buttonClear.Text = "Clear";
+            this.buttonClear.UseVisualStyleBackColor = true;
+            this.buttonClear.Click += new System.EventHandler(this.buttonClear_Click);
             // 
-            // dateTimeFrom
+            // buttonCalculateSaving
             // 
-            this.dateTimeFrom.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dateTimeFrom.Location = new System.Drawing.Point(12, 36);
-            this.dateTimeFrom.Name = "dateTimeFrom";
-            this.dateTimeFrom.Size = new System.Drawing.Size(168, 22);
-            this.dateTimeFrom.TabIndex = 0;
-            // 
-            // dateTimeTo
-            // 
-            this.dateTimeTo.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dateTimeTo.Location = new System.Drawing.Point(203, 35);
-            this.dateTimeTo.Name = "dateTimeTo";
-            this.dateTimeTo.Size = new System.Drawing.Size(168, 22);
-            this.dateTimeTo.TabIndex = 1;
-            // 
-            // textBox1
-            // 
-            this.textBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox1.Location = new System.Drawing.Point(12, 7);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.ReadOnly = true;
-            this.textBox1.Size = new System.Drawing.Size(168, 22);
-            this.textBox1.TabIndex = 2;
-            this.textBox1.Text = "From Date";
+            this.buttonCalculateSaving.Location = new System.Drawing.Point(582, 8);
+            this.buttonCalculateSaving.Name = "buttonCalculateSaving";
+            this.buttonCalculateSaving.Size = new System.Drawing.Size(106, 50);
+            this.buttonCalculateSaving.TabIndex = 4;
+            this.buttonCalculateSaving.Text = "Calculate Savings";
+            this.buttonCalculateSaving.UseVisualStyleBackColor = true;
+            this.buttonCalculateSaving.Click += new System.EventHandler(this.buttonCalculateSaving_Click);
             // 
             // textBox2
             // 
@@ -125,21 +104,94 @@
             this.textBox2.TabIndex = 3;
             this.textBox2.Text = "To Date";
             // 
-            // buttonCalculateSaving
+            // textBox1
             // 
-            this.buttonCalculateSaving.Location = new System.Drawing.Point(413, 7);
-            this.buttonCalculateSaving.Name = "buttonCalculateSaving";
-            this.buttonCalculateSaving.Size = new System.Drawing.Size(106, 50);
-            this.buttonCalculateSaving.TabIndex = 4;
-            this.buttonCalculateSaving.Text = "Calculate Savings";
-            this.buttonCalculateSaving.UseVisualStyleBackColor = true;
-            this.buttonCalculateSaving.Click += new System.EventHandler(this.buttonCalculateSaving_Click);
+            this.textBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textBox1.Location = new System.Drawing.Point(12, 7);
+            this.textBox1.Name = "textBox1";
+            this.textBox1.ReadOnly = true;
+            this.textBox1.Size = new System.Drawing.Size(168, 22);
+            this.textBox1.TabIndex = 2;
+            this.textBox1.Text = "From Date";
+            // 
+            // dateTimeTo
+            // 
+            this.dateTimeTo.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.dateTimeTo.Location = new System.Drawing.Point(203, 35);
+            this.dateTimeTo.Name = "dateTimeTo";
+            this.dateTimeTo.Size = new System.Drawing.Size(168, 22);
+            this.dateTimeTo.TabIndex = 1;
+            // 
+            // dateTimeFrom
+            // 
+            this.dateTimeFrom.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.dateTimeFrom.Location = new System.Drawing.Point(12, 36);
+            this.dateTimeFrom.Name = "dateTimeFrom";
+            this.dateTimeFrom.Size = new System.Drawing.Size(168, 22);
+            this.dateTimeFrom.TabIndex = 0;
+            // 
+            // savingChart
+            // 
+            this.savingChart.BackColor = System.Drawing.Color.Transparent;
+            chartArea2.AlignmentOrientation = ((System.Windows.Forms.DataVisualization.Charting.AreaAlignmentOrientations)((System.Windows.Forms.DataVisualization.Charting.AreaAlignmentOrientations.Vertical | System.Windows.Forms.DataVisualization.Charting.AreaAlignmentOrientations.Horizontal)));
+            chartArea2.AlignmentStyle = System.Windows.Forms.DataVisualization.Charting.AreaAlignmentStyles.None;
+            chartArea2.Area3DStyle.IsClustered = true;
+            chartArea2.Area3DStyle.IsRightAngleAxes = false;
+            chartArea2.Area3DStyle.LightStyle = System.Windows.Forms.DataVisualization.Charting.LightStyle.Realistic;
+            chartArea2.Area3DStyle.PointDepth = 50;
+            chartArea2.Area3DStyle.PointGapDepth = 150;
+            chartArea2.Area3DStyle.WallWidth = 5;
+            chartArea2.BackColor = System.Drawing.Color.Honeydew;
+            chartArea2.BackImageTransparentColor = System.Drawing.Color.Transparent;
+            chartArea2.IsSameFontSizeForAllAxes = true;
+            chartArea2.Name = "ChartArea1";
+            this.savingChart.ChartAreas.Add(chartArea2);
+            this.savingChart.Dock = System.Windows.Forms.DockStyle.Fill;
+            legend2.Name = "Legend1";
+            this.savingChart.Legends.Add(legend2);
+            this.savingChart.Location = new System.Drawing.Point(0, 0);
+            this.savingChart.Name = "savingChart";
+            this.savingChart.Palette = System.Windows.Forms.DataVisualization.Charting.ChartColorPalette.Excel;
+            series3.ChartArea = "ChartArea1";
+            series3.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.SplineArea;
+            series3.IsValueShownAsLabel = true;
+            series3.IsXValueIndexed = true;
+            series3.Legend = "Legend1";
+            series3.Name = "Series1";
+            series3.YValuesPerPoint = 2;
+            series4.ChartArea = "ChartArea1";
+            series4.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.SplineArea;
+            series4.Legend = "Legend1";
+            series4.Name = "Series2";
+            this.savingChart.Series.Add(series3);
+            this.savingChart.Series.Add(series4);
+            this.savingChart.Size = new System.Drawing.Size(1372, 447);
+            this.savingChart.TabIndex = 0;
+            this.savingChart.Text = "chart1";
+            // 
+            // chartTypeSelector
+            // 
+            this.chartTypeSelector.FormattingEnabled = true;
+            this.chartTypeSelector.Location = new System.Drawing.Point(387, 33);
+            this.chartTypeSelector.Name = "chartTypeSelector";
+            this.chartTypeSelector.Size = new System.Drawing.Size(168, 24);
+            this.chartTypeSelector.TabIndex = 6;
+            // 
+            // textBox3
+            // 
+            this.textBox3.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textBox3.Location = new System.Drawing.Point(387, 5);
+            this.textBox3.Name = "textBox3";
+            this.textBox3.ReadOnly = true;
+            this.textBox3.Size = new System.Drawing.Size(168, 22);
+            this.textBox3.TabIndex = 7;
+            this.textBox3.Text = "Chart Type";
             // 
             // ResumeSavingsForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1255, 520);
+            this.ClientSize = new System.Drawing.Size(1372, 520);
             this.Controls.Add(this.splitContainer1);
             this.Name = "ResumeSavingsForm";
             this.Text = "Saving Resume";
@@ -162,5 +214,8 @@
         private System.Windows.Forms.DateTimePicker dateTimeFrom;
         private System.Windows.Forms.DataVisualization.Charting.Chart savingChart;
         private System.Windows.Forms.Button buttonCalculateSaving;
+        private System.Windows.Forms.Button buttonClear;
+        private System.Windows.Forms.TextBox textBox3;
+        private System.Windows.Forms.ComboBox chartTypeSelector;
     }
 }

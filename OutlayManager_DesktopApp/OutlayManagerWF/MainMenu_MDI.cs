@@ -171,11 +171,19 @@ namespace OutlayManagerWF
             new BackupManager().OpenBackupDirectory();
         }
 
-        private void button3_Click(object sender, EventArgs e)
+        private void buttonResumeSavings_Click(object sender, EventArgs e)
         {
             using (ResumeSavingsForm resumeSavingsForm = new ResumeSavingsForm())
             {
-                resumeSavingsForm.ShowDialog(this);
+                try
+                {
+                    resumeSavingsForm.ShowDialog(this);
+                }
+                catch (Exception exception)
+                {
+                    new DialogManager().ShowDialog(DialogManager.DialogLevel.Exception, exception.Message, this);
+                    buttonResumeSavings_Click(this, null);
+                }
             }
         }
     }

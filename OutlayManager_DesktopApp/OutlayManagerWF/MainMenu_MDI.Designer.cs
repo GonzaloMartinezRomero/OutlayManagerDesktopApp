@@ -374,7 +374,7 @@
             this.button3.TabIndex = 37;
             this.button3.Text = "Months Savings ";
             this.button3.UseVisualStyleBackColor = true;
-            this.button3.Click += new System.EventHandler(this.button3_Click);
+            this.button3.Click += new System.EventHandler(this.buttonResumeSavings_Click);
             // 
             // MainMenu_MDI
             // 
