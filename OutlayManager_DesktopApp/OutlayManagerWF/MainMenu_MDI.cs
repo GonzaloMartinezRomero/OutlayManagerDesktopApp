@@ -3,6 +3,7 @@ using OutlayManagerWF.Model;
 using OutlayManagerWF.Model.Info;
 using OutlayManagerWF.Utilities;
 using OutlayManagerWF.View.ResumeTransactions;
+using OutlayManagerWF.View.TransactionsAnalycer;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -67,8 +68,8 @@ namespace OutlayManagerWF
                     CalendarTransaction calendarTransaction = new CalendarTransaction(yearSelected, monthSelected);
                     calendarTransaction.MdiParent = this;
                     
-                    this.splitContainer1.Panel2.Controls.Add(calendarTransaction);
-                    this.splitContainer1.Dock = DockStyle.Fill;
+                    this.splitContainer2.Panel2.Controls.Add(calendarTransaction);
+                    this.splitContainer2.Dock = DockStyle.Fill;
 
                     formsLoaded.Add(dateSelected);
                     calendarTransaction.FormClosed += UnloadFormCalendar;
@@ -184,6 +185,15 @@ namespace OutlayManagerWF
                     new DialogManager().ShowDialog(DialogManager.DialogLevel.Exception, exception.Message, this);
                     buttonResumeSavings_Click(this, null);
                 }
+            }
+        }
+
+        private void analycerToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            using (TransactionAnalycer transacionAnalycer = new TransactionAnalycer())
+            {
+                transacionAnalycer.LoadTransactions();
+                transacionAnalycer.ShowDialog(this);
             }
         }
     }

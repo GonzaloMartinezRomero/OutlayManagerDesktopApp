@@ -29,9 +29,15 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            this.bindingSource1 = new System.Windows.Forms.BindingSource(this.components);
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
-            this.buttonBackupFolder = new System.Windows.Forms.Button();
-            this.textBox3 = new System.Windows.Forms.TextBox();
+            this.menuStrip1 = new System.Windows.Forms.MenuStrip();
+            this.aSDFToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.savingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.monthResumeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.aDSFToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.openBackupFolderToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.splitContainer2 = new System.Windows.Forms.SplitContainer();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.textBox4 = new System.Windows.Forms.TextBox();
             this.textBoxExpenses = new System.Windows.Forms.TextBox();
@@ -47,7 +53,6 @@
             this.textBoxTotalAmount = new System.Windows.Forms.TextBox();
             this.textBoxTotal = new System.Windows.Forms.TextBox();
             this.autoBackupCheck = new System.Windows.Forms.CheckBox();
-            this.button2 = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
             this.textBox2 = new System.Windows.Forms.TextBox();
             this.dropDownMonth = new System.Windows.Forms.ComboBox();
@@ -55,67 +60,117 @@
             this.dropDownYear = new System.Windows.Forms.ComboBox();
             this.textBox5 = new System.Windows.Forms.TextBox();
             this.textBox8 = new System.Windows.Forms.TextBox();
-            this.bindingSource1 = new System.Windows.Forms.BindingSource(this.components);
-            this.button3 = new System.Windows.Forms.Button();
+            this.analycerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            ((System.ComponentModel.ISupportInitialize)(this.bindingSource1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
+            this.splitContainer1.Panel2.SuspendLayout();
             this.splitContainer1.SuspendLayout();
+            this.menuStrip1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).BeginInit();
+            this.splitContainer2.Panel1.SuspendLayout();
+            this.splitContainer2.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.Date.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.bindingSource1)).BeginInit();
             this.SuspendLayout();
             // 
             // splitContainer1
             // 
             this.splitContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.splitContainer1.FixedPanel = System.Windows.Forms.FixedPanel.Panel1;
             this.splitContainer1.Location = new System.Drawing.Point(0, 0);
             this.splitContainer1.Name = "splitContainer1";
+            this.splitContainer1.Orientation = System.Windows.Forms.Orientation.Horizontal;
             // 
             // splitContainer1.Panel1
             // 
-            this.splitContainer1.Panel1.Controls.Add(this.button3);
-            this.splitContainer1.Panel1.Controls.Add(this.buttonBackupFolder);
-            this.splitContainer1.Panel1.Controls.Add(this.textBox3);
-            this.splitContainer1.Panel1.Controls.Add(this.groupBox2);
-            this.splitContainer1.Panel1.Controls.Add(this.Date);
-            this.splitContainer1.Panel1.Controls.Add(this.textBoxTotalAmount);
-            this.splitContainer1.Panel1.Controls.Add(this.textBoxTotal);
-            this.splitContainer1.Panel1.Controls.Add(this.autoBackupCheck);
-            this.splitContainer1.Panel1.Controls.Add(this.button2);
-            this.splitContainer1.Panel1.Controls.Add(this.button1);
-            this.splitContainer1.Panel1.Controls.Add(this.textBox2);
-            this.splitContainer1.Panel1.Controls.Add(this.dropDownMonth);
-            this.splitContainer1.Panel1.Controls.Add(this.textBox1);
-            this.splitContainer1.Panel1.Controls.Add(this.dropDownYear);
-            this.splitContainer1.Panel1.Controls.Add(this.textBox5);
-            this.splitContainer1.Panel1.Controls.Add(this.textBox8);
+            this.splitContainer1.Panel1.Controls.Add(this.menuStrip1);
+            // 
+            // splitContainer1.Panel2
+            // 
+            this.splitContainer1.Panel2.Controls.Add(this.splitContainer2);
             this.splitContainer1.Size = new System.Drawing.Size(1407, 723);
-            this.splitContainer1.SplitterDistance = 247;
-            this.splitContainer1.TabIndex = 14;
+            this.splitContainer1.SplitterDistance = 25;
+            this.splitContainer1.TabIndex = 16;
             // 
-            // buttonBackupFolder
+            // menuStrip1
             // 
-            this.buttonBackupFolder.Location = new System.Drawing.Point(28, 649);
-            this.buttonBackupFolder.Name = "buttonBackupFolder";
-            this.buttonBackupFolder.Size = new System.Drawing.Size(178, 29);
-            this.buttonBackupFolder.TabIndex = 36;
-            this.buttonBackupFolder.Text = "Open Backup Folder";
-            this.buttonBackupFolder.UseVisualStyleBackColor = true;
-            this.buttonBackupFolder.Click += new System.EventHandler(this.buttonBackupFolder_Click);
+            this.menuStrip1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.menuStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
+            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.aSDFToolStripMenuItem,
+            this.aDSFToolStripMenuItem});
+            this.menuStrip1.Location = new System.Drawing.Point(0, 0);
+            this.menuStrip1.Name = "menuStrip1";
+            this.menuStrip1.ShowItemToolTips = true;
+            this.menuStrip1.Size = new System.Drawing.Size(1407, 25);
+            this.menuStrip1.TabIndex = 0;
+            this.menuStrip1.Text = "menuStrip1";
             // 
-            // textBox3
+            // aSDFToolStripMenuItem
             // 
-            this.textBox3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.textBox3.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox3.Location = new System.Drawing.Point(16, 604);
-            this.textBox3.Multiline = true;
-            this.textBox3.Name = "textBox3";
-            this.textBox3.ReadOnly = true;
-            this.textBox3.Size = new System.Drawing.Size(208, 34);
-            this.textBox3.TabIndex = 35;
-            this.textBox3.Text = "BACKUPS";
-            this.textBox3.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.aSDFToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.savingsToolStripMenuItem,
+            this.monthResumeToolStripMenuItem,
+            this.analycerToolStripMenuItem});
+            this.aSDFToolStripMenuItem.Name = "aSDFToolStripMenuItem";
+            this.aSDFToolStripMenuItem.Size = new System.Drawing.Size(104, 21);
+            this.aSDFToolStripMenuItem.Text = "Data Viewer";
+            // 
+            // savingsToolStripMenuItem
+            // 
+            this.savingsToolStripMenuItem.Name = "savingsToolStripMenuItem";
+            this.savingsToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.savingsToolStripMenuItem.Text = "Savings";
+            this.savingsToolStripMenuItem.Click += new System.EventHandler(this.buttonResumeSavings_Click);
+            // 
+            // monthResumeToolStripMenuItem
+            // 
+            this.monthResumeToolStripMenuItem.Name = "monthResumeToolStripMenuItem";
+            this.monthResumeToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.monthResumeToolStripMenuItem.Text = "Month Resume";
+            this.monthResumeToolStripMenuItem.Click += new System.EventHandler(this.showResume_Click);
+            // 
+            // aDSFToolStripMenuItem
+            // 
+            this.aDSFToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.openBackupFolderToolStripMenuItem});
+            this.aDSFToolStripMenuItem.Name = "aDSFToolStripMenuItem";
+            this.aDSFToolStripMenuItem.Size = new System.Drawing.Size(77, 21);
+            this.aDSFToolStripMenuItem.Text = "Backups";
+            // 
+            // openBackupFolderToolStripMenuItem
+            // 
+            this.openBackupFolderToolStripMenuItem.Name = "openBackupFolderToolStripMenuItem";
+            this.openBackupFolderToolStripMenuItem.Size = new System.Drawing.Size(226, 26);
+            this.openBackupFolderToolStripMenuItem.Text = "Open Backup Folder";
+            this.openBackupFolderToolStripMenuItem.Click += new System.EventHandler(this.buttonBackupFolder_Click);
+            // 
+            // splitContainer2
+            // 
+            this.splitContainer2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.splitContainer2.FixedPanel = System.Windows.Forms.FixedPanel.Panel1;
+            this.splitContainer2.Location = new System.Drawing.Point(0, 0);
+            this.splitContainer2.Name = "splitContainer2";
+            // 
+            // splitContainer2.Panel1
+            // 
+            this.splitContainer2.Panel1.BackColor = System.Drawing.Color.Transparent;
+            this.splitContainer2.Panel1.Controls.Add(this.groupBox2);
+            this.splitContainer2.Panel1.Controls.Add(this.Date);
+            this.splitContainer2.Panel1.Controls.Add(this.textBoxTotalAmount);
+            this.splitContainer2.Panel1.Controls.Add(this.textBoxTotal);
+            this.splitContainer2.Panel1.Controls.Add(this.autoBackupCheck);
+            this.splitContainer2.Panel1.Controls.Add(this.button1);
+            this.splitContainer2.Panel1.Controls.Add(this.textBox2);
+            this.splitContainer2.Panel1.Controls.Add(this.dropDownMonth);
+            this.splitContainer2.Panel1.Controls.Add(this.textBox1);
+            this.splitContainer2.Panel1.Controls.Add(this.dropDownYear);
+            this.splitContainer2.Panel1.Controls.Add(this.textBox5);
+            this.splitContainer2.Panel1.Controls.Add(this.textBox8);
+            this.splitContainer2.Panel1.Margin = new System.Windows.Forms.Padding(1);
+            this.splitContainer2.Size = new System.Drawing.Size(1407, 694);
+            this.splitContainer2.SplitterDistance = 247;
+            this.splitContainer2.TabIndex = 15;
             // 
             // groupBox2
             // 
@@ -126,7 +181,7 @@
             this.groupBox2.Controls.Add(this.textBoxSaving);
             this.groupBox2.Controls.Add(this.textBoxIncoming);
             this.groupBox2.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupBox2.Location = new System.Drawing.Point(16, 407);
+            this.groupBox2.Location = new System.Drawing.Point(16, 339);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(222, 152);
             this.groupBox2.TabIndex = 34;
@@ -203,7 +258,7 @@
             this.Date.Controls.Add(this.textBox10);
             this.Date.Controls.Add(this.textBoxYear);
             this.Date.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Date.Location = new System.Drawing.Point(16, 291);
+            this.Date.Location = new System.Drawing.Point(16, 223);
             this.Date.Name = "Date";
             this.Date.Size = new System.Drawing.Size(222, 110);
             this.Date.TabIndex = 33;
@@ -255,7 +310,7 @@
             // textBoxTotalAmount
             // 
             this.textBoxTotalAmount.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBoxTotalAmount.Location = new System.Drawing.Point(108, 567);
+            this.textBoxTotalAmount.Location = new System.Drawing.Point(108, 499);
             this.textBoxTotalAmount.Name = "textBoxTotalAmount";
             this.textBoxTotalAmount.ReadOnly = true;
             this.textBoxTotalAmount.Size = new System.Drawing.Size(130, 24);
@@ -265,7 +320,7 @@
             // textBoxTotal
             // 
             this.textBoxTotal.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBoxTotal.Location = new System.Drawing.Point(16, 567);
+            this.textBoxTotal.Location = new System.Drawing.Point(16, 499);
             this.textBoxTotal.Name = "textBoxTotal";
             this.textBoxTotal.ReadOnly = true;
             this.textBoxTotal.Size = new System.Drawing.Size(86, 24);
@@ -276,26 +331,16 @@
             // autoBackupCheck
             // 
             this.autoBackupCheck.AutoSize = true;
-            this.autoBackupCheck.Location = new System.Drawing.Point(31, 692);
+            this.autoBackupCheck.Location = new System.Drawing.Point(16, 545);
             this.autoBackupCheck.Name = "autoBackupCheck";
             this.autoBackupCheck.Size = new System.Drawing.Size(139, 21);
             this.autoBackupCheck.TabIndex = 30;
             this.autoBackupCheck.Text = "Backup On Close";
             this.autoBackupCheck.UseVisualStyleBackColor = true;
             // 
-            // button2
-            // 
-            this.button2.Location = new System.Drawing.Point(28, 167);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(178, 29);
-            this.button2.TabIndex = 29;
-            this.button2.Text = "Transactions Resume";
-            this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.showResume_Click);
-            // 
             // button1
             // 
-            this.button1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
+            this.button1.BackColor = System.Drawing.Color.Transparent;
             this.button1.Location = new System.Drawing.Point(28, 132);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(178, 29);
@@ -344,7 +389,7 @@
             // 
             this.textBox5.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.textBox5.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox5.Location = new System.Drawing.Point(16, 247);
+            this.textBox5.Location = new System.Drawing.Point(16, 179);
             this.textBox5.Multiline = true;
             this.textBox5.Name = "textBox5";
             this.textBox5.ReadOnly = true;
@@ -366,15 +411,12 @@
             this.textBox8.Text = "TRANSACTIONS";
             this.textBox8.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
-            // button3
+            // analycerToolStripMenuItem
             // 
-            this.button3.Location = new System.Drawing.Point(28, 202);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(178, 29);
-            this.button3.TabIndex = 37;
-            this.button3.Text = "Months Savings ";
-            this.button3.UseVisualStyleBackColor = true;
-            this.button3.Click += new System.EventHandler(this.buttonResumeSavings_Click);
+            this.analycerToolStripMenuItem.Name = "analycerToolStripMenuItem";
+            this.analycerToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.analycerToolStripMenuItem.Text = "Analycer";
+            this.analycerToolStripMenuItem.Click += new System.EventHandler(this.analycerToolStripMenuItem_Click);
             // 
             // MainMenu_MDI
             // 
@@ -383,18 +425,26 @@
             this.ClientSize = new System.Drawing.Size(1407, 723);
             this.Controls.Add(this.splitContainer1);
             this.IsMdiContainer = true;
+            this.MainMenuStrip = this.menuStrip1;
             this.Name = "MainMenu_MDI";
             this.Text = "MainMenu";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
+            ((System.ComponentModel.ISupportInitialize)(this.bindingSource1)).EndInit();
             this.splitContainer1.Panel1.ResumeLayout(false);
             this.splitContainer1.Panel1.PerformLayout();
+            this.splitContainer1.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
             this.splitContainer1.ResumeLayout(false);
+            this.menuStrip1.ResumeLayout(false);
+            this.menuStrip1.PerformLayout();
+            this.splitContainer2.Panel1.ResumeLayout(false);
+            this.splitContainer2.Panel1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).EndInit();
+            this.splitContainer2.ResumeLayout(false);
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
             this.Date.ResumeLayout(false);
             this.Date.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.bindingSource1)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -402,31 +452,35 @@
         #endregion
         private System.Windows.Forms.BindingSource bindingSource1;
         private System.Windows.Forms.SplitContainer splitContainer1;
-        private System.Windows.Forms.TextBox textBox8;
-        private System.Windows.Forms.TextBox textBox5;
-        private System.Windows.Forms.TextBox textBoxSaving;
+        private System.Windows.Forms.MenuStrip menuStrip1;
+        private System.Windows.Forms.ToolStripMenuItem aSDFToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem savingsToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem monthResumeToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem aDSFToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem openBackupFolderToolStripMenuItem;
+        private System.Windows.Forms.SplitContainer splitContainer2;
+        private System.Windows.Forms.GroupBox groupBox2;
+        private System.Windows.Forms.TextBox textBox4;
         private System.Windows.Forms.TextBox textBoxExpenses;
-        private System.Windows.Forms.TextBox textBoxIncoming;
-        private System.Windows.Forms.TextBox textBox9;
         private System.Windows.Forms.TextBox textBox7;
+        private System.Windows.Forms.TextBox textBox9;
+        private System.Windows.Forms.TextBox textBoxSaving;
+        private System.Windows.Forms.TextBox textBoxIncoming;
+        private System.Windows.Forms.GroupBox Date;
+        private System.Windows.Forms.TextBox textBoxMonth;
+        private System.Windows.Forms.TextBox textBox11;
+        private System.Windows.Forms.TextBox textBox10;
+        private System.Windows.Forms.TextBox textBoxYear;
+        private System.Windows.Forms.TextBox textBoxTotalAmount;
+        private System.Windows.Forms.TextBox textBoxTotal;
+        private System.Windows.Forms.CheckBox autoBackupCheck;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.TextBox textBox2;
         private System.Windows.Forms.ComboBox dropDownMonth;
         private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.ComboBox dropDownYear;
-        private System.Windows.Forms.TextBox textBoxMonth;
-        private System.Windows.Forms.TextBox textBoxYear;
-        private System.Windows.Forms.TextBox textBox10;
-        private System.Windows.Forms.TextBox textBox11;
-        private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.CheckBox autoBackupCheck;
-        private System.Windows.Forms.TextBox textBoxTotalAmount;
-        private System.Windows.Forms.TextBox textBoxTotal;
-        private System.Windows.Forms.GroupBox groupBox2;
-        private System.Windows.Forms.GroupBox Date;
-        private System.Windows.Forms.TextBox textBox4;
-        private System.Windows.Forms.Button buttonBackupFolder;
-        private System.Windows.Forms.TextBox textBox3;
-        private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.TextBox textBox5;
+        private System.Windows.Forms.TextBox textBox8;
+        private System.Windows.Forms.ToolStripMenuItem analycerToolStripMenuItem;
     }
 }
