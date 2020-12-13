@@ -1,6 +1,7 @@
 ﻿using OutlayManagerWF.Model;
 using OutlayManagerWF.Model.Info;
 using OutlayManagerWF.Model.View;
+using OutlayManagerWF.Utilities;
 using OutlayManagerWF.WebServices;
 using System;
 using System.Collections.Generic;
@@ -156,31 +157,52 @@ namespace OutlayManagerWF.Manager
 
         public List<ResumeTransactionDTO> GetAllMonthsTransactions(int year, int month)
         {
-            ResumeTransactionDTO resume = new ResumeTransactionDTO();
+            OutlayAPIManager managerAPI = null;
 
             try
             {
-                OutlayAPIManager managerAPI = new OutlayAPIManager();
+                managerAPI = new OutlayAPIManager();
 
                 List<TransactionDTO> transactions = managerAPI.GetTransaction(year, month);
 
-                List<ResumeTransactionDTO> listResume = transactions.Select(value =>
-                                                                    {
-                                                                        return new ResumeTransactionDTO()
-                                                                        {
-                                                                            Code = value.DetailTransaction.Code,
-                                                                            Type = value.DetailTransaction.Type,
-                                                                            Amount = value.Amount,
-                                                                            Date = value.Date,
-                                                                        };
-                                                                    })
-                                                                     .ToList();
+                List<ResumeTransactionDTO> listResume = transactions.Select(value => CastObject.ToResumeTransaction(value))
+                                                                    .ToList();
                 return listResume;
 
             }
             catch (Exception e)
             {
                 throw new Exception("Error while procesing resume by code", e);
+            }
+            finally
+            {
+                managerAPI?.Dispose();
+            }
+        }
+
+        public List<ResumeTransactionDTO> GetAllTransactions()
+        {
+            ResumeTransactionDTO transactionsResume = new ResumeTransactionDTO();
+            OutlayAPIManager managerAPI = null;
+
+            try
+            {
+                managerAPI = new OutlayAPIManager();
+
+                List<TransactionDTO> transactions = managerAPI.GetAllTransactions();
+
+                List<ResumeTransactionDTO> listResume = transactions.Select(value => CastObject.ToResumeTransaction(value))
+                                                                    .ToList();
+                return listResume;
+
+            }
+            catch (Exception e)
+            {
+                throw new Exception("Error while procesing resume by code", e);
+            }
+            finally
+            {
+                managerAPI?.Dispose();
             }
         }
 

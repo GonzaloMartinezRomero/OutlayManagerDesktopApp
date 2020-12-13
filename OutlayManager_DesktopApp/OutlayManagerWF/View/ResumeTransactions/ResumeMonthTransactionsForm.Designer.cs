@@ -30,8 +30,8 @@
         {
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.advancedDataGridView1 = new Zuby.ADGV.AdvancedDataGridView();
-            this.textBox1 = new System.Windows.Forms.TextBox();
             this.textBoxTotalAmount = new System.Windows.Forms.TextBox();
+            this.textBox1 = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -54,7 +54,7 @@
             // 
             this.splitContainer1.Panel2.Controls.Add(this.textBoxTotalAmount);
             this.splitContainer1.Panel2.Controls.Add(this.textBox1);
-            this.splitContainer1.Size = new System.Drawing.Size(700, 657);
+            this.splitContainer1.Size = new System.Drawing.Size(740, 657);
             this.splitContainer1.SplitterDistance = 564;
             this.splitContainer1.TabIndex = 1;
             // 
@@ -74,8 +74,16 @@
             this.advancedDataGridView1.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.advancedDataGridView1.RowHeadersWidth = 51;
             this.advancedDataGridView1.RowTemplate.Height = 24;
-            this.advancedDataGridView1.Size = new System.Drawing.Size(700, 564);
+            this.advancedDataGridView1.Size = new System.Drawing.Size(740, 564);
             this.advancedDataGridView1.TabIndex = 1;
+            // 
+            // textBoxTotalAmount
+            // 
+            this.textBoxTotalAmount.Location = new System.Drawing.Point(126, 17);
+            this.textBoxTotalAmount.Name = "textBoxTotalAmount";
+            this.textBoxTotalAmount.ReadOnly = true;
+            this.textBoxTotalAmount.Size = new System.Drawing.Size(126, 22);
+            this.textBoxTotalAmount.TabIndex = 1;
             // 
             // textBox1
             // 
@@ -87,22 +95,14 @@
             this.textBox1.TabIndex = 0;
             this.textBox1.Text = "Total Amount:";
             // 
-            // textBoxTotalAmount
-            // 
-            this.textBoxTotalAmount.Location = new System.Drawing.Point(126, 17);
-            this.textBoxTotalAmount.Name = "textBoxTotalAmount";
-            this.textBoxTotalAmount.ReadOnly = true;
-            this.textBoxTotalAmount.Size = new System.Drawing.Size(126, 22);
-            this.textBoxTotalAmount.TabIndex = 1;
-            // 
-            // ResumeForm
+            // ResumeMonthTransactionsForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(700, 657);
+            this.ClientSize = new System.Drawing.Size(740, 657);
             this.Controls.Add(this.splitContainer1);
-            this.Name = "ResumeForm";
-            this.Text = "ResumeForm";
+            this.Name = "ResumeMonthTransactionsForm";
+            this.Text = "Transactions Month Resume";
             this.splitContainer1.Panel1.ResumeLayout(false);
             this.splitContainer1.Panel2.ResumeLayout(false);
             this.splitContainer1.Panel2.PerformLayout();

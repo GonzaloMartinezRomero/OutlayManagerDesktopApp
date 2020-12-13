@@ -54,45 +54,56 @@ namespace OutlayManagerWF.View.ResumeTransactions
                 SeriesChartType.Area,
                 SeriesChartType.Column,
             });
+
+            //Line by default
+            this.chartTypeSelector.SelectedItem = SeriesChartType.Line;
+
         }
 
         private void buttonCalculateSaving_Click(object sender, EventArgs e)
         {
-            using OutlayAPIManager apiManager = new OutlayAPIManager();
-            List<TransactionView> transacionsList = apiManager.GetAllTransactions()
-                                                              .Select(x => Utilities.CastObject.TransactionToTransactionView(x))
-                                                              .ToList();
+            try
+            {
+                using OutlayAPIManager apiManager = new OutlayAPIManager();
+                List<TransactionView> transacionsList = apiManager.GetAllTransactions()
+                                                                  .Select(x => Utilities.CastObject.TransactionToTransactionView(x))
+                                                                  .ToList();
 
-            DateTime dateFrom = new DateTime(this.dateTimeFrom.Value.Year, this.dateTimeFrom.Value.Month, 1);
-            DateTime dateTo = new DateTime(this.dateTimeTo.Value.Year, this.dateTimeTo.Value.Month, DateTime.DaysInMonth(this.dateTimeTo.Value.Year, this.dateTimeTo.Value.Month));
+                DateTime dateFrom = new DateTime(this.dateTimeFrom.Value.Year, this.dateTimeFrom.Value.Month, 1);
+                DateTime dateTo = new DateTime(this.dateTimeTo.Value.Year, this.dateTimeTo.Value.Month, DateTime.DaysInMonth(this.dateTimeTo.Value.Year, this.dateTimeTo.Value.Month));
 
-            if(dateTo.Year !=dateFrom.Year)
-                throw new Exception("Range of time must be 1 year per serie");
+                if (dateTo.Year != dateFrom.Year)
+                    throw new Exception("Range of time must be 1 year per serie");
 
-            Dictionary<DateKey,string> result = transacionsList.Where(x => x.Date >= dateFrom && x.Date <= dateTo)
-                           .GroupBy(x => new DateKey(x.Date.Month, x.Date.Year))
-                                                .Select(x =>
-                                                {
-                                                    double totalIncoming = x.Where(y => OutlayDataHelper.GetOutlayType(y.Type) == OutlayDataHelper.OutlayTypesEnum.ADJUST ||
-                                                                                         OutlayDataHelper.GetOutlayType(y.Type) == OutlayDataHelper.OutlayTypesEnum.INCOMING)
-                                                                            .Select(x => x.Amount)
-                                                                            .Sum();
-
-                                                    double totalSpend = x.Where(y => OutlayDataHelper.GetOutlayType(y.Type) == OutlayDataHelper.OutlayTypesEnum.SPENDING)
-                                                                          .Select(x => x.Amount)
-                                                                          .Sum();
-
-                                                    string totalMonthSave = Utilities.Normalizer.SpainFormatAmount((totalIncoming - totalSpend));
-
-                                                    return new
+                Dictionary<DateKey, string> result = transacionsList.Where(x => x.Date >= dateFrom && x.Date <= dateTo)
+                               .GroupBy(x => new DateKey(x.Date.Month, x.Date.Year))
+                                                    .Select(x =>
                                                     {
-                                                        x.Key,
-                                                        totalMonthSave
-                                                    };
-                                                })
-                                                .ToDictionary(key => key.Key, value => value.totalMonthSave);
-            
-            AddNewSerie(result, dateFrom.Year);
+                                                        double totalIncoming = x.Where(y => OutlayDataHelper.GetOutlayType(y.Type) == OutlayDataHelper.OutlayTypesEnum.ADJUST ||
+                                                                                             OutlayDataHelper.GetOutlayType(y.Type) == OutlayDataHelper.OutlayTypesEnum.INCOMING)
+                                                                                .Select(x => x.Amount)
+                                                                                .Sum();
+
+                                                        double totalSpend = x.Where(y => OutlayDataHelper.GetOutlayType(y.Type) == OutlayDataHelper.OutlayTypesEnum.SPENDING)
+                                                                              .Select(x => x.Amount)
+                                                                              .Sum();
+
+                                                        string totalMonthSave = Utilities.Normalizer.SpainFormatAmount((totalIncoming - totalSpend));
+
+                                                        return new
+                                                        {
+                                                            x.Key,
+                                                            totalMonthSave
+                                                        };
+                                                    })
+                                                    .ToDictionary(key => key.Key, value => value.totalMonthSave);
+
+                AddNewSerie(result, dateFrom.Year);
+            }
+            catch(Exception ex)
+            {
+                new DialogManager().ShowDialog(DialogManager.DialogLevel.Exception, ex.Message, this);
+            }
         }
 
         private void AddNewSerie(Dictionary<DateKey, string> dictValues, int year)
@@ -109,8 +120,7 @@ namespace OutlayManagerWF.View.ResumeTransactions
                     IsXValueIndexed = true,
                     ChartType = this.chartTypeSelector.SelectedItem as SeriesChartType? ?? SeriesChartType.Line,
                     IsValueShownAsLabel = true,
-                    MarkerStyle = MarkerStyle.Circle
-                    
+                    MarkerStyle = MarkerStyle.Circle                    
                 };
 
                 this.savingChart.Series.Add(savingSerie);
