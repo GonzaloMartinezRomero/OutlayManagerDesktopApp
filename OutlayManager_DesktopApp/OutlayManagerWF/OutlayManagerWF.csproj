@@ -156,6 +156,12 @@
     <Compile Include="View\ResumeTransactions\ResumeMonthTransactionsForm.Designer.cs">
       <DependentUpon>ResumeMonthTransactionsForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="View\TransactionsAnalycer\TransactionAnalycer.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\TransactionsAnalycer\TransactionAnalycer.Designer.cs">
+      <DependentUpon>TransactionAnalycer.cs</DependentUpon>
+    </Compile>
     <Compile Include="WebServices\OutlayAPIManager.cs" />
     <Compile Include="WebServices\OutlayDataHelper.cs" />
     <EmbeddedResource Include="View\CalendarTransactionOperations\CalendarTransaction.resx">
@@ -191,6 +197,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="View\ResumeTransactions\ResumeMonthTransactionsForm.resx">
       <DependentUpon>ResumeMonthTransactionsForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\TransactionsAnalycer\TransactionAnalycer.resx">
+      <DependentUpon>TransactionAnalycer.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="packages.config" />
     <None Include="Properties\DataSources\OutlayManagerWF.Model.DetailTransacionDTO.datasource" />
