@@ -33,15 +33,13 @@
             System.Windows.Forms.DataVisualization.Charting.Series series3 = new System.Windows.Forms.DataVisualization.Charting.Series();
             System.Windows.Forms.DataVisualization.Charting.Series series4 = new System.Windows.Forms.DataVisualization.Charting.Series();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
+            this.comboBoxYears = new System.Windows.Forms.ComboBox();
+            this.textBox3 = new System.Windows.Forms.TextBox();
+            this.chartTypeSelector = new System.Windows.Forms.ComboBox();
             this.buttonClear = new System.Windows.Forms.Button();
             this.buttonCalculateSaving = new System.Windows.Forms.Button();
             this.textBox2 = new System.Windows.Forms.TextBox();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.dateTimeTo = new System.Windows.Forms.DateTimePicker();
-            this.dateTimeFrom = new System.Windows.Forms.DateTimePicker();
             this.savingChart = new System.Windows.Forms.DataVisualization.Charting.Chart();
-            this.chartTypeSelector = new System.Windows.Forms.ComboBox();
-            this.textBox3 = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -58,14 +56,12 @@
             // 
             // splitContainer1.Panel1
             // 
+            this.splitContainer1.Panel1.Controls.Add(this.comboBoxYears);
             this.splitContainer1.Panel1.Controls.Add(this.textBox3);
             this.splitContainer1.Panel1.Controls.Add(this.chartTypeSelector);
             this.splitContainer1.Panel1.Controls.Add(this.buttonClear);
             this.splitContainer1.Panel1.Controls.Add(this.buttonCalculateSaving);
             this.splitContainer1.Panel1.Controls.Add(this.textBox2);
-            this.splitContainer1.Panel1.Controls.Add(this.textBox1);
-            this.splitContainer1.Panel1.Controls.Add(this.dateTimeTo);
-            this.splitContainer1.Panel1.Controls.Add(this.dateTimeFrom);
             // 
             // splitContainer1.Panel2
             // 
@@ -74,9 +70,35 @@
             this.splitContainer1.SplitterDistance = 69;
             this.splitContainer1.TabIndex = 0;
             // 
+            // comboBoxYears
+            // 
+            this.comboBoxYears.FormattingEnabled = true;
+            this.comboBoxYears.Location = new System.Drawing.Point(12, 37);
+            this.comboBoxYears.Name = "comboBoxYears";
+            this.comboBoxYears.Size = new System.Drawing.Size(168, 24);
+            this.comboBoxYears.TabIndex = 8;
+            // 
+            // textBox3
+            // 
+            this.textBox3.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textBox3.Location = new System.Drawing.Point(196, 9);
+            this.textBox3.Name = "textBox3";
+            this.textBox3.ReadOnly = true;
+            this.textBox3.Size = new System.Drawing.Size(168, 22);
+            this.textBox3.TabIndex = 7;
+            this.textBox3.Text = "Chart Type";
+            // 
+            // chartTypeSelector
+            // 
+            this.chartTypeSelector.FormattingEnabled = true;
+            this.chartTypeSelector.Location = new System.Drawing.Point(196, 37);
+            this.chartTypeSelector.Name = "chartTypeSelector";
+            this.chartTypeSelector.Size = new System.Drawing.Size(168, 24);
+            this.chartTypeSelector.TabIndex = 6;
+            // 
             // buttonClear
             // 
-            this.buttonClear.Location = new System.Drawing.Point(694, 8);
+            this.buttonClear.Location = new System.Drawing.Point(503, 12);
             this.buttonClear.Name = "buttonClear";
             this.buttonClear.Size = new System.Drawing.Size(106, 50);
             this.buttonClear.TabIndex = 5;
@@ -86,49 +108,23 @@
             // 
             // buttonCalculateSaving
             // 
-            this.buttonCalculateSaving.Location = new System.Drawing.Point(582, 8);
+            this.buttonCalculateSaving.Location = new System.Drawing.Point(391, 12);
             this.buttonCalculateSaving.Name = "buttonCalculateSaving";
             this.buttonCalculateSaving.Size = new System.Drawing.Size(106, 50);
             this.buttonCalculateSaving.TabIndex = 4;
-            this.buttonCalculateSaving.Text = "Calculate Savings";
+            this.buttonCalculateSaving.Text = "Load Savings";
             this.buttonCalculateSaving.UseVisualStyleBackColor = true;
             this.buttonCalculateSaving.Click += new System.EventHandler(this.buttonCalculateSaving_Click);
             // 
             // textBox2
             // 
             this.textBox2.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox2.Location = new System.Drawing.Point(203, 7);
+            this.textBox2.Location = new System.Drawing.Point(12, 11);
             this.textBox2.Name = "textBox2";
             this.textBox2.ReadOnly = true;
             this.textBox2.Size = new System.Drawing.Size(168, 22);
             this.textBox2.TabIndex = 3;
-            this.textBox2.Text = "To Date";
-            // 
-            // textBox1
-            // 
-            this.textBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox1.Location = new System.Drawing.Point(12, 7);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.ReadOnly = true;
-            this.textBox1.Size = new System.Drawing.Size(168, 22);
-            this.textBox1.TabIndex = 2;
-            this.textBox1.Text = "From Date";
-            // 
-            // dateTimeTo
-            // 
-            this.dateTimeTo.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dateTimeTo.Location = new System.Drawing.Point(203, 35);
-            this.dateTimeTo.Name = "dateTimeTo";
-            this.dateTimeTo.Size = new System.Drawing.Size(168, 22);
-            this.dateTimeTo.TabIndex = 1;
-            // 
-            // dateTimeFrom
-            // 
-            this.dateTimeFrom.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dateTimeFrom.Location = new System.Drawing.Point(12, 36);
-            this.dateTimeFrom.Name = "dateTimeFrom";
-            this.dateTimeFrom.Size = new System.Drawing.Size(168, 22);
-            this.dateTimeFrom.TabIndex = 0;
+            this.textBox2.Text = "Year";
             // 
             // savingChart
             // 
@@ -169,24 +165,6 @@
             this.savingChart.TabIndex = 0;
             this.savingChart.Text = "chart1";
             // 
-            // chartTypeSelector
-            // 
-            this.chartTypeSelector.FormattingEnabled = true;
-            this.chartTypeSelector.Location = new System.Drawing.Point(387, 33);
-            this.chartTypeSelector.Name = "chartTypeSelector";
-            this.chartTypeSelector.Size = new System.Drawing.Size(168, 24);
-            this.chartTypeSelector.TabIndex = 6;
-            // 
-            // textBox3
-            // 
-            this.textBox3.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox3.Location = new System.Drawing.Point(387, 5);
-            this.textBox3.Name = "textBox3";
-            this.textBox3.ReadOnly = true;
-            this.textBox3.Size = new System.Drawing.Size(168, 22);
-            this.textBox3.TabIndex = 7;
-            this.textBox3.Text = "Chart Type";
-            // 
             // ResumeSavingsForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -209,13 +187,11 @@
 
         private System.Windows.Forms.SplitContainer splitContainer1;
         private System.Windows.Forms.TextBox textBox2;
-        private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.DateTimePicker dateTimeTo;
-        private System.Windows.Forms.DateTimePicker dateTimeFrom;
         private System.Windows.Forms.DataVisualization.Charting.Chart savingChart;
         private System.Windows.Forms.Button buttonCalculateSaving;
         private System.Windows.Forms.Button buttonClear;
         private System.Windows.Forms.TextBox textBox3;
         private System.Windows.Forms.ComboBox chartTypeSelector;
+        private System.Windows.Forms.ComboBox comboBoxYears;
     }
 }

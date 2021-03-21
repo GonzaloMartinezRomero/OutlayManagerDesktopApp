@@ -1,4 +1,5 @@
 ﻿using OutlayManagerWF.Manager;
+using OutlayManagerWF.Model;
 using OutlayManagerWF.Model.View;
 using OutlayManagerWF.WebServices;
 using System;
@@ -12,9 +13,7 @@ using System.Windows.Forms.DataVisualization.Charting;
 namespace OutlayManagerWF.View.ResumeTransactions
 {
     public partial class ResumeSavingsForm : Form
-    {
-        private const string DATE_FORMAT = "MM/yyyy";
-        private readonly DateTime MIN_DATETIME = new DateTime(2019,01,01);
+    {   
         private readonly Queue<Color> queueSerieColors = new Queue<Color>();
 
         public ResumeSavingsForm()
@@ -36,13 +35,8 @@ namespace OutlayManagerWF.View.ResumeTransactions
 
         private void ConfigureForm()
         {
-            this.dateTimeFrom.Format = DateTimePickerFormat.Custom;
-            this.dateTimeFrom.CustomFormat = DATE_FORMAT;
-            this.dateTimeFrom.Value = MIN_DATETIME;
-
-            this.dateTimeTo.Format = DateTimePickerFormat.Custom;
-            this.dateTimeTo.CustomFormat = DATE_FORMAT;
-            this.dateTimeTo.Value = DateTime.Today;
+            List<int> yearsAvailables = LoadYearsAvailables();
+            this.comboBoxYears.DataSource = yearsAvailables;
 
             this.savingChart.Titles.Add("Savings Resume");
             this.savingChart.Series.Clear();
@@ -57,7 +51,18 @@ namespace OutlayManagerWF.View.ResumeTransactions
 
             //Line by default
             this.chartTypeSelector.SelectedItem = SeriesChartType.Line;
+        }
 
+        private List<int> LoadYearsAvailables()
+        {
+            using OutlayAPIManager apiManager = new OutlayAPIManager();
+            List<TransactionDTO> allTransactions = apiManager.GetAllTransactions();
+
+            List<int> yearsAvailables = allTransactions.Select(x => x.Date.Year)
+                                                       .Distinct()
+                                                       .ToList();
+
+            return yearsAvailables;
         }
 
         private void buttonCalculateSaving_Click(object sender, EventArgs e)
@@ -69,13 +74,9 @@ namespace OutlayManagerWF.View.ResumeTransactions
                                                                   .Select(x => Utilities.CastObject.TransactionToTransactionView(x))
                                                                   .ToList();
 
-                DateTime dateFrom = new DateTime(this.dateTimeFrom.Value.Year, this.dateTimeFrom.Value.Month, 1);
-                DateTime dateTo = new DateTime(this.dateTimeTo.Value.Year, this.dateTimeTo.Value.Month, DateTime.DaysInMonth(this.dateTimeTo.Value.Year, this.dateTimeTo.Value.Month));
+               int yearSelected = (int)this.comboBoxYears.SelectedItem; 
 
-                if (dateTo.Year != dateFrom.Year)
-                    throw new Exception("Range of time must be 1 year per serie");
-
-                Dictionary<DateKey, string> result = transacionsList.Where(x => x.Date >= dateFrom && x.Date <= dateTo)
+                Dictionary<DateKey, string> result = transacionsList.Where(x => x.Date.Year == yearSelected)
                                .GroupBy(x => new DateKey(x.Date.Month, x.Date.Year))
                                                     .Select(x =>
                                                     {
@@ -98,7 +99,7 @@ namespace OutlayManagerWF.View.ResumeTransactions
                                                     })
                                                     .ToDictionary(key => key.Key, value => value.totalMonthSave);
 
-                AddNewSerie(result, dateFrom.Year);
+                AddNewSerie(result, yearSelected);
             }
             catch(Exception ex)
             {
